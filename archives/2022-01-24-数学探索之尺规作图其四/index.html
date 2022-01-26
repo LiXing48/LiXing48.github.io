@@ -20,24 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="我并不是专门搞安全的，这里的安全泛指网络安全，不自作孽的话，离线情况一般不存在安全问题，而我知道这件事还是因为学校对信管部的通知，不知为何我就想了解一下，真就这么离谱，一个日志都可以被骇入。我先简单整理一下这个漏洞是怎么产生的，这个漏洞产生在使用了Log4j2日志的服务器，但影响版本有一定范围，有log4j2版本和JDK版本，依据攻击方式各不相同。其中常见的攻击方式是，针对log4j2提供的Loo">
+  <meta name="description" content="这们在这里打算做一次特别的尝试，有些人可能会认为将一个操作性的问题转化为数的问题总感觉怪怪的，似乎是纸上谈兵但还有几分道理。所以我们打算改变初始图形，不能让它只是空白。 导入一道经典的题目是，已知一个椭圆，尺规做出所有的椭圆信息(如焦点等)。这道题网上有许多解答，可以去参考，这里说一下大体思路，首先我们需要了解一下椭圆的基本几何性质，大多人对椭圆的印象来源于解析几何，其也可以看出许多性质，如对称性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Log4j2漏洞后的反思">
-<meta property="og:url" content="http://example.com/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/index.html">
+<meta property="og:title" content="数学探索之尺规作图其四">
+<meta property="og:url" content="http://example.com/archives/2022-01-24-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E5%9B%9B/index.html">
 <meta property="og:site_name" content="虚空之地">
-<meta property="og:description" content="我并不是专门搞安全的，这里的安全泛指网络安全，不自作孽的话，离线情况一般不存在安全问题，而我知道这件事还是因为学校对信管部的通知，不知为何我就想了解一下，真就这么离谱，一个日志都可以被骇入。我先简单整理一下这个漏洞是怎么产生的，这个漏洞产生在使用了Log4j2日志的服务器，但影响版本有一定范围，有log4j2版本和JDK版本，依据攻击方式各不相同。其中常见的攻击方式是，针对log4j2提供的Loo">
+<meta property="og:description" content="这们在这里打算做一次特别的尝试，有些人可能会认为将一个操作性的问题转化为数的问题总感觉怪怪的，似乎是纸上谈兵但还有几分道理。所以我们打算改变初始图形，不能让它只是空白。 导入一道经典的题目是，已知一个椭圆，尺规做出所有的椭圆信息(如焦点等)。这道题网上有许多解答，可以去参考，这里说一下大体思路，首先我们需要了解一下椭圆的基本几何性质，大多人对椭圆的印象来源于解析几何，其也可以看出许多性质，如对称性">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/p1.png">
-<meta property="og:image" content="http://example.com/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/p2.png">
-<meta property="article:published_time" content="2021-12-13T01:38:35.000Z">
-<meta property="article:modified_time" content="2021-12-13T03:47:11.158Z">
+<meta property="article:published_time" content="2022-01-24T09:51:11.000Z">
+<meta property="article:modified_time" content="2022-01-26T09:40:57.427Z">
 <meta property="article:author" content="逯晓零">
-<meta property="article:tag" content="漏洞">
-<meta property="article:tag" content="安全">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="尺规作图">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/p1.png">
 
-<link rel="canonical" href="http://example.com/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/">
+<link rel="canonical" href="http://example.com/archives/2022-01-24-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E5%9B%9B/">
 
 
 <script id="page-configurations">
@@ -50,7 +47,7 @@
   };
 </script>
 
-  <title>Log4j2漏洞后的反思 | 虚空之地</title>
+  <title>数学探索之尺规作图其四 | 虚空之地</title>
   
 
 
@@ -180,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/archives/2022-01-24-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E5%9B%9B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -194,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/" class="post-title-link" itemprop="url">Log4j2漏洞后的反思</a>
+            <a href="/archives/2022-01-24-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E5%9B%9B/" class="post-title-link" itemprop="url">数学探索之尺规作图其四</a>
         </h2>
 
         <div class="post-meta">
@@ -203,17 +200,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-13 09:38:35 / 修改时间：11:47:11" itemprop="dateCreated datePublished" datetime="2021-12-13T09:38:35+08:00">2021-12-13</time>
+              <time title="创建时间：2022-01-24 17:51:11" itemprop="dateCreated datePublished" datetime="2022-01-24T17:51:11+08:00">2022-01-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-26 17:40:57" itemprop="dateModified" datetime="2022-01-26T17:40:57+08:00">2022-01-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%84%9F%E6%82%9F/" itemprop="url" rel="index"><span itemprop="name">感悟</span></a>
+                  <a href="/categories/%E7%90%86%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">理学</span></a>
                 </span>
             </span>
 
@@ -228,11 +231,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我并不是专门搞安全的，这里的安全泛指网络安全，不自作孽的话，离线情况一般不存在安全问题，而我知道这件事还是因为学校对信管部的通知，不知为何我就想了解一下，真就这么离谱，一个日志都可以被骇入。<br>我先简单整理一下这个漏洞是怎么产生的，这个漏洞产生在使用了Log4j2日志的服务器，但影响版本有一定范围，有log4j2版本和JDK版本，依据攻击方式各不相同。其中常见的攻击方式是，针对log4j2提供的Lookups模块，该模块可以执行”${}”对应的符合一定格式的语句，一般对于信息输出，无关紧要，更致命的是它内部没有对参数分开处理的情况下还提供了Jndi的功能，一般情况下我们采用占位符输出，像这样<code>Log.info(&quot;name:&#123;&#125;&quot;,username)</code>，为了输出能力更强，log4j2提供了可执行输出<code>username=&quot;$&#123;java:os&#125;&quot;</code>这是lookups的java模块  </p>
-<img src="/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/p1.png" class="">  
-<p>真正危险的是下面这个功能  </p>
-<img src="/archives/2021-12-13-Log4j2%E6%BC%8F%E6%B4%9E%E5%90%8E%E7%9A%84%E5%8F%8D%E6%80%9D/p2.png" class="">  
-<p>虽说官方说使用在配置文件里，但从底层实现可以发现，使用如上的Log.info也会执行相应代码，而且对于jndi此库是基于javaapi的相应库实现的，而这个jndi库很久以前就被曝存在jndi注入漏洞，主要存在jdk较低版本里，我们应该理解为什么很多公司都停留在jdk7和jdk8，因为更新有时会使维护变得困难。jndi注入，虽说与sql注入和js注入相似，但有本质的区别，java不是脚本语言，代码是需要编译的，与此齐名的是java反序列化漏洞，比如Fastjson就存在这个漏洞。在java的jndi里本质只是一个接口，用于定位网络上资源，可以是局域网也可以是广域网，与url类似，jndi底层协议中比较危险的是rmi和ldap，我们以前者为例，rmi用于远程执行代码，但是必须要服务端提供相应的继承于Remote的接口，但是从实现上来看，服务端需要使用类加载器来加载远程端的class代码，而类加载中会执行类中存在static代码块，就算没有服务端的接口函数来执行，也可以注入相应代码。这过程其实还是挺复杂的，但本质还是注入漏洞，只不过比一般脚本注入有更高的权限，而这种漏洞主要还是过于相信用户输入，还有就是没有完全将后端封闭在安全的空间里，只要后端在局域网里也没什么好怕的。当然还有局域网渗透，但门都没锁好又能怪谁。<br>当然安全漏洞牵扯的相关方还是挺多的，如log4j2方对于参数判断不过完善却还提供jndi模块，使用的开发者可能挺无辜，不知道一个日志库还有这种功能，但相信用户输入也是不对的，更何况这还是在后端，jdk一直在低版本也不太对，但jdk方提供远程执行功能本身也存在风险的。不过纠结谁对谁错是没有意义的，而是对我们今后的启示。<br>首先是库的开源问题，开源库有助于大家一起学习发现漏洞，但取决于谁发现漏洞了，实际上大部分人都倾向于使用而非研究源码，反而是安全人员或骇客比较乐于此。此时开源反而成了弊端，对于还需要反编译或读汇编的闭源库，开源反而更容易被研究，这时或许就能理解为什么公司乐于使用商业软件了，供应方不仅能提供指导服务还能背锅，从经济和资本家的角度考虑，这样的投资确实是值得的。<br>然后是库自身的问题，本身作为一个日志库，却提供超过日志库的功能，功能越复杂就越有可能出问题，但过于细分化也是有可能出问题的，如nodejs的leftpad事件，这虽然与安全无关，但也说明了使用轮子的弊端。但终究我们还是得用库的，主要在于对库的选择和了解，依赖当然是越少越好，有时还是得看看底层，在学习源码的同时，还有助于发现潜在风险。<br>最后是本身属于服务端应考虑的问题了，既然将自己暴露于公网，那一些常见的风险怎能不考虑呢，如用户输入可能产生的注入问题。不过像我这样的静态网页，也没什么有用的数据库的，还依赖于其它服务器的小网页，其实也没什么考虑的必要就是了。<br>还记得我之前对自己不喜欢用轮子的批评，现在看来有必要重新考虑了，并在两者间稍微做些权衡了。”一切网络风险都是自己引入的”这句话可一点也不假。</p>
+          <p>这们在这里打算做一次特别的尝试，有些人可能会认为将一个操作性的问题转化为数的问题总感觉怪怪的，似乎是纸上谈兵但还有几分道理。所以我们打算改变初始图形，不能让它只是空白。</p>
+<h1 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h1><p>一道经典的题目是，已知一个椭圆，尺规做出所有的椭圆信息(如焦点等)。这道题网上有许多解答，可以去参考，这里说一下大体思路，首先我们需要了解一下椭圆的基本几何性质，大多人对椭圆的印象来源于解析几何，其也可以看出许多性质，如对称性之类的，但比较实际的几乎研究来源于射影几何，虽说在射影空间里也存在解析的研究，但核心在于挖掘几何性质。废话说多了，问题的开始就是先找出中心，可以利用对称作图和中点的性质，然后再通过做长短轴就能得到几乎所有的对称性质了，对称优先性，这应该是几何中的一个常识吧。一旦到这一步，后面其实都简单了，准确来说是思路打开了，比如通过勾股定理做出焦点之类的，通过切线做准线之类的。总之，你稍微了解一下这个题目就行了，接下来开始咱们的形式化之旅，这才是重点。</p>
+<h1 id="椭圆作图的初始条件"><a href="#椭圆作图的初始条件" class="headerlink" title="椭圆作图的初始条件"></a>椭圆作图的初始条件</h1><p>我们注意到这样一个事实，不论是否存在椭圆，原来能做的现在一样能做，如我们之前所说，可做数的本质来源于相似所产生的比值，也就是说，我们首先要挖出椭圆上的单位一在哪里。实际上，我想了很多天后的结论就是，暂时没有办法，进行多次尝试后，容易发现一个椭圆实际上只是提供了一个数——任意两条轴(总共3条轴a,b,c，但自由度只有2)的比。那椭圆上的其它点如何？能用，但几乎没用，它不能提供更多有效的信息，这里依据老规矩我来进行一下形象的说明。提供椭圆，但实际上只能做圆和直线，这与能做椭圆是存在本质区别的，当我们做出长轴和短轴时，它提供了椭圆上点对应参数的依据，根据椭圆的参数方程可以发现在长度提供上没有任何新的东西，放缩行为有没有椭圆，都是可以完成的，而差别在于我之前所说的比。有人可能会说，它难道不能提供后续作图上的帮助吗？能，但不可控，而不可控的点几乎等价于不可做，比如凭空截一条弦，最多只能当成单位一，但与其它的比是未知的。总结一句话就是，椭圆只提供了长短轴的比。</p>
+<h1 id="对导入的回答"><a href="#对导入的回答" class="headerlink" title="对导入的回答"></a>对导入的回答</h1><p>那么最开始的那道作图题，是否能从形式上说明可作图性呢？结论是不能，更进一步说没有必要。椭圆的参数并不能简单的抽象为一个数，它与直线和圆这类简单图形不同，光轴就有两条，或许多元数可能有些用处，但不在我们的讨论之中。你可能会觉得椭圆只是圆做变化就能得到的，但只有度量空间才能区分出椭圆和圆，而在射影空间中两者是一回事，尺规作图就是限定在度量空间的，所以它赋予椭圆的使命就是提供一个数，仅此而已。</p>
+<h1 id="草草了结"><a href="#草草了结" class="headerlink" title="草草了结"></a>草草了结</h1><p>有些东西，我都不知道该如何分类了，有那种感觉，但就是写不出来，结果就是搞像一篇文论一样。这篇文章本身就是来说明之前的方法并非万能，同时印证尺规作图不能过度形式化的观点，它终究还是灵活的。但奈何都不能从数学上严格来定义这些概念，只能模糊地说明了。拖了这么久，只有这么点东西，充分说明了我以前的观点——我只适合学数学，而不适合研究数学。这就是研究的一个失败例子，不过还是有发出来的必要，以此来警示自己。</p>
 
       
     </div>
@@ -298,6 +301,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A4%AD%E5%9C%86%E4%BD%9C%E5%9B%BE%E7%9A%84%E5%88%9D%E5%A7%8B%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">椭圆作图的初始条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E5%AF%BC%E5%85%A5%E7%9A%84%E5%9B%9E%E7%AD%94"><span class="nav-number">3.</span> <span class="nav-text">对导入的回答</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8D%89%E8%8D%89%E4%BA%86%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">草草了结</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
