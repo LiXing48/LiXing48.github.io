@@ -20,26 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="“这充分证明了C++代码和VC++代码是不同的。”这事发生在我引用一个老开源项目的时候，那个作者还在用win7和使用vs2013，出问题的代码，我大致模拟了一下，就是如下这样      内容比较简单，就是一个函数返回一个结构体，我们将它返回值的引用传给另一个函数来输出。我的环境是win10和vs2019，原来作者当然是没有报错的，而我这里报了”取地址操作必需作用于左值”。所谓”左值”指的是可以寻址">
+  <meta name="description" content="实在没什么可写的了，但还是水一下这部分的最后一篇文章吧。在这里，我们稍微介绍一下一些特殊的欧式作图问题。 结构欧式作图问题的主要结构有三个部分，初始图，作图工具和作图目标。求出所有的作图范围显然比单纯的作图目标更吸引人，所以说真正重要的只有前两部分，有关初始图形我们之前讨论过，它似乎用处不大，因此欧式作图的变形基本在于工具的不同，接下来我们就从这个角度来稍微看看吧。 单规作图 只用一把圆规作图。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编程手记之临时对象">
-<meta property="og:url" content="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:title" content="数学探索之尺规作图其五">
+<meta property="og:url" content="http://example.com/archives/2022-01-27-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E4%BA%94/index.html">
 <meta property="og:site_name" content="虚空之地">
-<meta property="og:description" content="“这充分证明了C++代码和VC++代码是不同的。”这事发生在我引用一个老开源项目的时候，那个作者还在用win7和使用vs2013，出问题的代码，我大致模拟了一下，就是如下这样      内容比较简单，就是一个函数返回一个结构体，我们将它返回值的引用传给另一个函数来输出。我的环境是win10和vs2019，原来作者当然是没有报错的，而我这里报了”取地址操作必需作用于左值”。所谓”左值”指的是可以寻址">
+<meta property="og:description" content="实在没什么可写的了，但还是水一下这部分的最后一篇文章吧。在这里，我们稍微介绍一下一些特殊的欧式作图问题。 结构欧式作图问题的主要结构有三个部分，初始图，作图工具和作图目标。求出所有的作图范围显然比单纯的作图目标更吸引人，所以说真正重要的只有前两部分，有关初始图形我们之前讨论过，它似乎用处不大，因此欧式作图的变形基本在于工具的不同，接下来我们就从这个角度来稍微看看吧。 单规作图 只用一把圆规作图。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p1.png">
-<meta property="og:image" content="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p2.png">
-<meta property="og:image" content="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p3.png">
-<meta property="og:image" content="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p4.png">
-<meta property="article:published_time" content="2022-01-11T06:47:31.000Z">
-<meta property="article:modified_time" content="2022-01-11T07:47:14.992Z">
+<meta property="article:published_time" content="2022-01-27T09:34:18.000Z">
+<meta property="article:modified_time" content="2022-01-27T14:18:37.324Z">
 <meta property="article:author" content="逯晓零">
-<meta property="article:tag" content="调试">
-<meta property="article:tag" content="编程手记">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="尺规作图">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p1.png">
 
-<link rel="canonical" href="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/">
+<link rel="canonical" href="http://example.com/archives/2022-01-27-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E4%BA%94/">
 
 
 <script id="page-configurations">
@@ -52,7 +47,7 @@
   };
 </script>
 
-  <title>编程手记之临时对象 | 虚空之地</title>
+  <title>数学探索之尺规作图其五 | 虚空之地</title>
   
 
 
@@ -182,7 +177,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/archives/2022-01-27-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E4%BA%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -196,7 +191,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">编程手记之临时对象</a>
+            <a href="/archives/2022-01-27-%E6%95%B0%E5%AD%A6%E6%8E%A2%E7%B4%A2%E4%B9%8B%E5%B0%BA%E8%A7%84%E4%BD%9C%E5%9B%BE%E5%85%B6%E4%BA%94/" class="post-title-link" itemprop="url">数学探索之尺规作图其五</a>
         </h2>
 
         <div class="post-meta">
@@ -207,7 +202,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-11 14:47:31 / 修改时间：15:47:14" itemprop="dateCreated datePublished" datetime="2022-01-11T14:47:31+08:00">2022-01-11</time>
+              <time title="创建时间：2022-01-27 17:34:18 / 修改时间：22:18:37" itemprop="dateCreated datePublished" datetime="2022-01-27T17:34:18+08:00">2022-01-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,7 +210,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+                  <a href="/categories/%E7%90%86%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">理学</span></a>
                 </span>
             </span>
 
@@ -230,15 +225,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>“这充分证明了C++代码和VC++代码是不同的。”这事发生在我引用一个老开源项目的时候，那个作者还在用win7和使用vs2013，出问题的代码，我大致模拟了一下，就是如下这样  </p>
-<img src="/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p1.png" class="">  
-<p>内容比较简单，就是一个函数返回一个结构体，我们将它返回值的引用传给另一个函数来输出。我的环境是win10和vs2019，原来作者当然是没有报错的，而我这里报了”取地址操作必需作用于左值”。所谓”左值”指的是可以寻址的值，如果认为返回的值是一个结构体，那它确实应该是一个左值，因为它们之间传递的是引用。如果我稍微加一个缓存变量，如下  </p>
-<img src="/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p2.png" class="">  
-<p>则一切运行正常。当时我一直被这个左值纠结，也秉着面向浏览器编程的理念，围绕这方面找了许多例子，错误代码搜索，相似代码查询，却怎么也找不到原因，我甚至怀疑返回结构体这个操作是否有问题，但最终还是无果。后来，我怀疑是不是vs的编译器取地址面向的是函数而不是函数的返回值，所以我决定用GUN套件来编译一下，结果  </p>
-<img src="/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p3.png" class="">  
-<p>果然GUN套件才是真正的神啊，它旳意思是临时变量不能取地址，所谓临时变量指的是它值的作用范围只有当前这一行，而函数的返回值就是典型的临时变量，嗯，其实这和编译器的优化有关，从汇编角度来看的话就是值是放在寄存器里的，没有放在内存里，所以不能取地址。简单来说临时变量是右值，当然右值还包括其它的，如立即数等。<br>其实，遇到这个还是挺开心的，这些东西在有些善于写代码的人手里基本不会出现，一般我们写函数返回值只有两种情况，传值的直接写，传引用的时候要特别地写成指针，比如好的习惯应当这样写  </p>
-<img src="/archives/2022-01-11-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E4%B8%B4%E6%97%B6%E5%AF%B9%E8%B1%A1/p4.png" class="">  
-<p>看，这不就正常运行了嘛，不过也有人指出可能是vs2013版本太老，还在使用较老的C标准的原因，比如C++11，而我的电脑最低只有C++14标准。不过追根究底的话，还是因为我太久没有遇到这些错误，搞得这些细节基本都忘记了。不过，最后我是想吐槽一下，这vs好像不是很好用，特别是报错能力，比如我用模板写代码的时候，用vs也太难找错误了吧。哦，还有那个资源管理实在太<del>垃圾</del>了吧。<br>总之，就这样吧，我并不打算开个新系列，只是有些想抱怨的东西，就随便记录一下吧，这些就整合成编程手记吧。</p>
+          <p>实在没什么可写的了，但还是水一下这部分的最后一篇文章吧。在这里，我们稍微介绍一下一些特殊的欧式作图问题。</p>
+<h5 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h5><p>欧式作图问题的主要结构有三个部分，初始图，作图工具和作图目标。求出所有的作图范围显然比单纯的作图目标更吸引人，所以说真正重要的只有前两部分，有关初始图形我们之前讨论过，它似乎用处不大，因此欧式作图的变形基本在于工具的不同，接下来我们就从这个角度来稍微看看吧。</p>
+<h5 id="单规作图"><a href="#单规作图" class="headerlink" title="单规作图"></a>单规作图</h5><blockquote>
+<p>只用一把圆规作图。</p>
+</blockquote>
+<p>结论是，除了连线可以做出所有尺规作图可以完成的图。虽然看起来有些不可思议，但如果仔细品读之前抽象的过程，就会发现尺子就是划线的，对于数域的扩张基本起不到作用。我们需要注意的是，点才是核心，而圆和线实际是可有可无的，除了产生交点，但直线能产生的交点都可以由圆产生。比如角平分线，我们可以只通过圆规来得到平分线上的点，但线的实体还是做不出来。</p>
+<h5 id="松规作图"><a href="#松规作图" class="headerlink" title="松规作图"></a>松规作图</h5><blockquote>
+<p>用无刻度直尺和离开纸面就无法保持长度的圆规作图。</p>
+</blockquote>
+<p>结论是，与尺规作图完全等价，实际上，长度迁移并非很重要的功能，在进行抽象化的过程中我们甚至没有使用过这个功能作为公理。我们可以更加明确的说，迁线可以直接通过圆的标点来实现，具体来说，就是通过过圆心的圆来实现长度迁移的功能。总之，可以想象一下，一个个圆互相推进的样子，我们只需圆心与圆上的点互换即可。</p>
+<h5 id="锈规作图"><a href="#锈规作图" class="headerlink" title="锈规作图"></a>锈规作图</h5><blockquote>
+<p>只使用半径固定的圆规和已知两个点作图。</p>
+</blockquote>
+<p>我们不管直线之类作图的，首先两个点，我就认为它没有太大意义，就算没有，再做两个点也没啥区别。那篇论文可以找到，实际上，它删去了相似的情形，以两个点作为单位一，其实单纯圆规就能完成作图，但固定的半径不能为这个单位一，否则度量是无法谈及的，当然随便取两点，说它是单位一也没什么问题。总之，就是尺规作图也能只用圆规作图，我们并没有固定半径，实际上，固定半径圆规加两个点和单纯圆规是一模一样的。</p>
+<h5 id="单尺作图"><a href="#单尺作图" class="headerlink" title="单尺作图"></a>单尺作图</h5><blockquote>
+<p>只用一把没有刻度尺子和一个已知圆心的圆作图。</p>
+</blockquote>
+<p>圆是必须的，不然对于一把尺子的话，是基本没有用处的，需要知道没有刻度的尺子等于没用，没有圆规等于没有度量信息，如我之前所说体现度量的不是直尺而是圆规，因为直尺是没有刻度的。而真正重要的其实是圆的圆心，有了它我们才能真正的只要直尺来，控制圆来模拟圆规的行为，因为圆规实际就是做圆，原来是圆找线，现在则是线找圆，这与锈规作图实际上是有一定的对偶性的。</p>
+<h5 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h5><p>这篇文章没有什么干货，只是稍微陈述一些事实，对尺规作图进行证明，关键在于你将尺规作图看做什么，又如何去定义它，而我并不认为它存在纯正的证明，因为它本身就是不纯正的。我一直将数学视为信仰，就如我之前相信尺规作图等价于域扩张一样，又或者是在射影空间里，将圆锥曲线视为同一东西，将点和直线视为等价。这是这系列的尺规作图部分的最后了，而这又是这个系列的开始，也是从实际到理论的过度，接下来的我将只活在数学的虚拟世界里，研究抽象的理论，实际问题即是我害怕的，也是我不想讨论的，不为其它，只因太累，我喜欢的是数学纯正的抽象，仅此而已。</p>
 
       
     </div>
@@ -304,6 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E8%A7%84%E4%BD%9C%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">单规作图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%BE%E8%A7%84%E4%BD%9C%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">松规作图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%94%88%E8%A7%84%E4%BD%9C%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">锈规作图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%95%E5%B0%BA%E4%BD%9C%E5%9B%BE"><span class="nav-number">5.</span> <span class="nav-text">单尺作图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%93%E5%B0%BE"><span class="nav-number">6.</span> <span class="nav-text">结尾</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
