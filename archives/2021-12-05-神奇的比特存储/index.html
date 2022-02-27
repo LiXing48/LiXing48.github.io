@@ -28,7 +28,7 @@
 <meta property="og:description" content="两个算法题号码去查重现在有两批QQ号，每批大约40亿个，每批可能存在重复的数据，但记录着不同的数据，我们有两个iterator，都可以通过iterator.nextuint获得下一个QQ号，数据类型为unsigned int，即每个QQ好最大不超过2^32-1[当然目前我所见过的QQ号，连30亿都没超过]，现在设计算法，使用内存不超过1G，找出两批QQ号公共QQ号的个数？这个问题有许多衍生，但我们">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-05T00:27:32.000Z">
-<meta property="article:modified_time" content="2021-12-06T12:20:19.619Z">
+<meta property="article:modified_time" content="2022-02-27T07:09:05.522Z">
 <meta property="article:author" content="逯晓零">
 <meta property="article:tag" content="内存">
 <meta property="article:tag" content="二进制">
@@ -208,7 +208,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-06 20:20:19" itemprop="dateModified" datetime="2021-12-06T20:20:19+08:00">2021-12-06</time>
+                <time title="修改时间：2022-02-27 15:09:05" itemprop="dateModified" datetime="2022-02-27T15:09:05+08:00">2022-02-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
 <p>整体不算复杂，我们不过多说明，重在学会其中的思想。</p>
 <h1 id="大整数存储"><a href="#大整数存储" class="headerlink" title="大整数存储"></a>大整数存储</h1><p>最后我们再来讲讲大整数的存储问题，通过之前的研究我们可以很容易地知道，我们可以通过bit来存储序数。比如每个int可以存储上限为2^32-1的整数，int[2]存储2^32的方式就可以是int[1]=1,int[0]=0。<br>在java里的BigInteger采用的就是上述方式，它使用int[]来存储大整数，数组的上限是<code>private static final int MAX_MAG_LENGTH = Integer.MAX_VALUE / Integer.SIZE + 1; // (1 &lt;&lt; 26)</code>总共才64M，虽然看起来不是很大，但实际上，我们一般通过String来初始化BigInteger，如果每秒输入一个字符，也要输2年多才能输满，这是你可能会告诉我使用pow函数来产生大的BigInteger。其实为什么设这个上限我也不太明白，可能因为它是运行在java虚拟机上，需要对内存稍做管理吧，其实数组可以传入的最大值应该是int即2^31-1，不过也可以通过链表进行实现，这样就可以无限申请内存了，这实际上是python内部大整数的实现方式。这是你可能会稍微疑惑为什么不使用long数组，这大概是java的倔强，它的加减乘除运算都是在java虚拟机层实现的，为了保证加法的进位不丢失，每次运算前它会使用<code>final static long LONG_MASK = 0xffffffffL;</code>先对一块int进行数据类型转化，再通过long的运算得到结果，最后分别取出进位继续运算，取一段加法稍微看看。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (yIndex &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                sum = (x[--xIndex] &amp; LONG_MASK) +</span><br><span class="line">                      (y[--yIndex] &amp; LONG_MASK) + (sum &gt;&gt;&gt; <span class="number">32</span>);</span><br><span class="line">                result[xIndex] = (<span class="keyword">int</span>)sum;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
-<p>sum是一个long用来缓存中间结果，x和y是两个加数，result用来存储最后的结果。<br>说到java，我们还要提一下android的java api，谷歌是我十分佩服的公司，安卓的javaapi虽然与java的许多部分都基本一致，但实现的方式却大有不同，比如这个BigInteger，首先它并不是在类似java虚拟机的delvik虚拟机上运行，而是通过jni来运行在native层的相关代码。从安卓在java层源码，我们可以看到BigInteger还有两个相关类，分别是BigInt和NativeBN，NativeBN用来申明Native方法，加减乘除幂等都在这申明，实现的话是在native层，BigInt则是真正处理BigInteger相关事务的类，比如构造函数初始化数据等，BigInteger则是为了保留java接口，本质是使用BigInt实现相同于java的功能，当然安卓SDK只保留了BigInteger的使用，所有用起来与java基本没有区别就是了。<br>最后或许要讲讲python，但实际上已经没什么好说的了，python3之前有对大整数和小整数进行分类存储，可能一定程度有提高效率，但python3则一律存储为大整数的方式，底层实现类似于bit存储的思想，但是因为python的原始解释器是C系列的语言，就可以直接操作内存，因此可以不受数组申明长度的限制，实现真正意义上的无限大整数，不过物理空间的限制和时间的限制已经超出软件的范畴了，不是我们应该考虑的。<br>这次我对大整数的实现，并没有带读者直接去读源码，有了之前lua的经验，我发现这样的意义，实际是不大的。其实，一旦我们可以理解其中的思想的话，读源码实际上就是水到渠成的，读源码的最大障碍就是不能理解，为什么要什么这个变量？为什么要如此回调？等。”授人以鱼不如授人以渔”，所以这次我先从某种思想的使用先讲清它的基本内容，再稍微提了一下，其它源码是如何使用这种思想又有哪些不同的地方。这实际是一种引导式的阅读，理解思想的读者其实读不读源码已经不重要了，读源码的目的则从学习方法变成了验证方法。<br>就到这里吧，明天也该开始把lua的坑给填了。</p>
+<p>sum是一个long用来缓存中间结果，x和y是两个加数，result用来存储最后的结果。<br>说到java，我们还要提一下android的java api，谷歌是我十分佩服的公司，安卓的javaapi虽然与java的许多部分都基本一致，但实现的方式却大有不同，比如这个BigInteger，首先它并不是在类似java虚拟机的delvik虚拟机上运行，而是通过jni来运行在native层的相关代码。从安卓在java层源码，我们可以看到BigInteger还有两个相关类，分别是BigInt和NativeBN，NativeBN用来申明Native方法，加减乘除幂等都在这申明，实现的话是在native层，BigInt则是真正处理BigInteger相关事务的类，比如构造函数初始化数据等，BigInteger则是为了保留java接口，本质是使用BigInt实现相同于java的功能，当然安卓SDK只保留了BigInteger的使用，所有用起来与java基本没有区别就是了。<br>最后或许要讲讲python，但实际上已经没什么好说的了，python3之前有对大整数和小整数进行分类存储，可能一定程度有提高效率，但python3则一律存储为大整数的方式，底层实现类似于bit存储的思想，但是因为python的原始解释器是C系列的语言，就可以直接操作内存，因此可以不受数组申明长度的限制，实现真正意义上的无限大整数，不过物理空间的限制和时间的限制已经超出软件的范畴了，不是我们应该考虑的。<br>这次我对大整数的实现，并没有带读者直接去读源码，有了之前lua的经验，我发现这样的意义，实际是不大的。其实，一旦我们可以理解其中的思想的话，读源码实际上就是水到渠成的，读源码的最大障碍就是不能理解，为什么要什么这个变量？为什么要如此回调？等。“授人以鱼不如授人以渔”，所以这次我先从某种思想的使用先讲清它的基本内容，再稍微提了一下，其它源码是如何使用这种思想又有哪些不同的地方。这实际是一种引导式的阅读，理解思想的读者其实读不读源码已经不重要了，读源码的目的则从学习方法变成了验证方法。<br>就到这里吧，明天也该开始把lua的坑给填了。</p>
 
       
     </div>
@@ -325,7 +325,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
