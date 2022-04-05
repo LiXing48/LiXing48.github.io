@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/apple-touch-icon-next.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="思维导图这玩意，我就基本没有画过，因为我知道，画了最后也只能入库吃灰，对我而言，抄抄想想就足够了。一切要求都来自外部，现实的事情是无法摆脱的，如果不是老师强迫我们画思维导图，我都不知道低质的软件还真是多啊。付费的软件真的好吗？付费存在两种机制，买断和内购，前者流行于国外，后者广泛存于国内。白嫖本身不利于软件本身的发展，会严重将软件引入歧途，内购机制什么时候进入国内的，我不太清楚，但我只记得以前并非">
+<meta property="og:type" content="article">
+<meta property="og:title" content="思维导图">
+<meta property="og:url" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="思维导图这玩意，我就基本没有画过，因为我知道，画了最后也只能入库吃灰，对我而言，抄抄想想就足够了。一切要求都来自外部，现实的事情是无法摆脱的，如果不是老师强迫我们画思维导图，我都不知道低质的软件还真是多啊。付费的软件真的好吗？付费存在两种机制，买断和内购，前者流行于国外，后者广泛存于国内。白嫖本身不利于软件本身的发展，会严重将软件引入歧途，内购机制什么时候进入国内的，我不太清楚，但我只记得以前并非">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p1.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p2.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p3.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p4.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p5.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p6.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p7.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p8.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p9.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p10.png">
+<meta property="og:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p11.png">
+<meta property="article:published_time" content="2022-04-05T02:31:52.000Z">
+<meta property="article:modified_time" content="2022-04-05T02:36:55.222Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/p1.png">
+
+<link rel="canonical" href="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>思维导图 | 虚空之地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">虚空之地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">空白ならば 何者にもなれる</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-words">
+
+    <a href="/words/" rel="section"><i class="fa fa-snowflake fa-fw"></i>动态</a>
+
+  </li>
+        <li class="menu-item menu-item-articles">
+
+    <a href="/articles/" rel="section"><i class="fa fa-book fa-fw"></i>文章</a>
+
+  </li>
+        <li class="menu-item menu-item-dream">
+
+    <a href="/dream/" rel="section"><i class="fa fa-lightbulb fa-fw"></i>绘梦</a>
+
+  </li>
+        <li class="menu-item menu-item-retrieval">
+
+    <a href="/retrieval/" rel="section"><i class="fa fa-search fa-fw"></i>检索</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+    
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="逯晓零">
+      <meta itemprop="description" content="自由之地 创造一切">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="虚空之地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/archives/2022-04-05-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/" class="post-title-link" itemprop="url">思维导图</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-05 10:31:52 / 修改时间：10:36:55" itemprop="dateCreated datePublished" datetime="2022-04-05T10:31:52+08:00">2022-04-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>思维导图这玩意，我就基本没有画过，因为我知道，画了最后也只能入库吃灰，对我而言，抄抄想想就足够了。一切要求都来自外部，现实的事情是无法摆脱的，如果不是老师强迫我们画思维导图，我都不知道低质的软件还真是多啊。付费的软件真的好吗？付费存在两种机制，买断和内购，前者流行于国外，后者广泛存于国内。白嫖本身不利于软件本身的发展，会严重将软件引入歧途，内购机制什么时候进入国内的，我不太清楚，但我只记得以前并非如此，但盗版真的太难避免了，这是国内的大环境，是没有办法的。有钱人的世界，不在我们考虑定位范畴，世界上乐于分享的人还是有许多的，开源社区绝对是一个好的选择，当然前提是你愿意去折腾。要么付钱，要么付时间，没有付出就被想奢求回报。</p>
+<h1 id="百度脑图"><a href="#百度脑图" class="headerlink" title="百度脑图"></a>百度脑图</h1><p>百度脑图，全称kityminder-editor，是一个十分远古的Web项目，不过还跑在百度的服务器上，<a target="_blank" rel="noopener" href="https://naotu.baidu.com/">地址</a>  </p>
+
+<img align="center" src="./p1.png" />
+
+<p>其功能比较简陋，操作也不算复杂，拿来应付作业还是足够的。我们看一下可用的导出格式</p>
+
+<img align="center" src="./p2.png" />
+
+<p>思维导图在程序界并非什么重要的东西，没有统一的格式编码标准，但又存在一定市场，所以导致了各种不同的思维导图格式。txt和md是常见的文本格式，svg是矢量图，不会失真，png是压缩位图，有透明通道。km是此编辑器脑图引擎的解析格式，即文件格式解析的核心kityminder，加上editor即UI等部分，组成了百度脑图这个Web程序，kityminder基于百度开发的矢量图形库kity集成数据可视化部分而成的引擎。实际上，kityminder的主要功能是将数据之间的图形结构展示出来的，而思维导图这名词说到底还是起源于学校，数据关系可视化可能是更加现代的称呼，大多商业级别的软件也基本不会以思维导图自称。实际上，矢量绘图软件也可以做思维导图，关键在于你认为什么是思维导图，方不反遍的问题了，如何摆脱传统观念的束缚是关键。Freemind是个远古级别的java程序，界面有些丑陋，我不是很喜欢，但是它以开源的姿态出现，给许多后继者提供了文件编码方案，比如mindmaster的emmx和mm都是压缩包里集成了一系列用于描述属性xml文件。XMind原先是开源软件，但由于“开源困境”，已经朝商业软件发展，这是我又不得不提一个软件Typora，是我以前很喜欢的文本编辑器，以前也是免费软件，现在也变成了付费商业软件。在开源社区里，寻找一番后，百度脑图还是最合我心意，所以我选择了它。</p>
+<h1 id="nodejs简介"><a href="#nodejs简介" class="headerlink" title="nodejs简介"></a>nodejs简介</h1><p>上面说这么多其实都不是我主要的目的，我们的目的是基于这个开源项目，构建我们自己的思维导图工具，同时进行一定程度的扩展，此项目的源地址在<a target="_blank" rel="noopener" href="https://github.com/fex-team/kityminder">这里</a>，它是一个nodejs项目，所以有必要稍微介绍一下nodejs。<br>我们连入互联网的方式有两种，一种是客户端，另一种是浏览器。客户端的通信通常基于TCP和UDP协议，它们属于应用层可以操作定位最基层了，再底层的IP协议属于操作系统的管理范畴，如果有root权限(非linux不存在控制关系)，想改改也是没问题的。TCP与UDP的差别是一个是我们互相发消息，另一个是单方面发消息，在这一层上，通信数据可以使用任意的文件流，所以开发者可以制作各种属于自己的通行协议，或者数据编码方式，又或者加密方式，其本质都是将数据进行转化。所以在这一层上通信，安全性有保障，所以大部分开发商，比起网站建设，更乐意开发客户端，而且网页在屏幕不大的手机上，进行适配也挺麻烦的。浏览器，则是在TCP协议之上，我们在地址框输入网址意味着什么呢？http(s)俗称超文本传输协议，顾名思义，我们本质上是在向某个服务器请求超文本数据，也就是我们的网页。从TCP简单理解的话就是，我们向服务器发送信息说“我要这个地址的东西”，然后服务器再向我们说出“整个页面的内容”，当然其中有用于保证安全“握手”过程，但我们看个整体就够了，而服务器返回的是网页文件html，也就是说网站页面的渲染实际是在本地进行的，网站基础布局使用html，样式调整使用css，脚本执行使用javascrpt(js)，后两个存在于html文件的link标签中，当然这其中的文件请求过程，浏览器全部会帮我们完成。<br>html，css和js是Web交流的核心，即网站开发的重要部分，但是现代开发却基本都不使用了，而使用更高一层的东西，如less替代css，ts(typescript)替代js。html，css和js在Web界已经像是原生开发里汇编差不多的地位，只是地位，因为从代码可读性来看，它们和高级语言是差不多的，只是它们在很多的实战中，存在与汇编一样的开发低效性，我们不仅有不同的浏览器要适配，还要适配各种屏幕。我们一样可以给Web一个跨平台的概念，以屏幕作为不同的平台，以浏览器作为不同的平台。<br>重复性的工作应当交给有一定逻辑处理能力的代码，在三套件中，只有js具有动态处理能力，它属于程序设计语言的一种，即有自己的内存，只不过是依赖本地的浏览器进行分配的罢了，其实浏览器就相当于js脚本的运行环境。一种使用js的方式就是，在布局文件html中引入已经集成部分功能的js，这种方式简便快捷，但是文件的分离性不高，耦合性太强，所以就引入我们的主题了——nodejs。<br>nodejs是一个基于ChromeV8引擎的js运行环境。ChromeV8是谷歌的开源浏览器内核，我们知道浏览器有一项重要的功能就是，解析获取的html，css和js文件，并将结果渲染到屏幕上，内核是存在js的解释器的，它可以执行js代码，同时还有与原生环境的交流，当然考虑安全问题，交流是有限的。nodejs则是基于此解释器，扩张了与原生环境的交流，换言之，是js有更加丰富的本地API，比如运行在浏览器上的js不能在本地进行端口监听，但运行在nodejs上就可以做到。nodejs使得js成为了一门真正意义上的程序设计语言，但是我们可以使用熟悉的js语言。开发语言是很多的，如果不经常用的话，是十分容易忘记的，如果同一门语言可以同时用于多个领域，在多种平台上都有解释环境，是十分方便的，Java就是一个活生生的例子。nodejs提供了js的解释平台，在这个平台上有无数的东西生根发芽了，比如你常见的小程序，ts、less等超集也在这个平台上扎根了。</p>
+<h1 id="以kityminder为例"><a href="#以kityminder为例" class="headerlink" title="以kityminder为例"></a>以kityminder为例</h1><p>有关工程的构建过程或许是十分简单的，直接看官方文档</p>
+
+<img align="center" src="./p3.png" />
+
+<p>首先随便找个地方，准备存放我们的工程，然后把上面所有的命令都执行一遍，最后在kityminder内，我们可以得到整个项目，和构建后的文件dist</p>
+
+<img align="center" src="./p4.png" />
+
+<p>在开发场景中的工程基本都是指文件夹加配置文件，与传统媒体文件有较大差别，如photoshop的ps，我们把所用过的指令和对应目录中的文件来一一解析吧<br><code>git clone ***</code>不依赖任何配置，主要将远程的git工程拷贝到本地，换言之就是，将工程下载下来的意思，标志一个文件夹是git工程，主要是图中<code>.git***</code>形式的文件，git主要用于代码管理。<code>git submodule ***</code>用于下载依赖工程，开发的基本思想之一是“不造重复的轮子”，所以工程的引用是十分常见的，比如搞图形我们要用glfw，在开源世界里面，有些东西不能直接放到自己工程内拿来发布，主要是发布这方面，类似于写论文中的引用文献，总不能全抄到论文里去吧。<br><code>npm install ***</code>依赖当前工程下的文件<code>package.json</code>，其里面的内容标志着这是一个nodejs工程，npm是nodejs的包管理工具，类似于java的maven。它们的工程特点都是，存在依赖、引用别人库的情况，install有是否为全局的选项，通常我们都不安装到全局，而是当前项目下，存储于<code>node_modules</code>目录下，因为不同项目可能使用不同版本的库，安装到全局的话，可能会引起冲突。<br><code>bower install ***</code>也是一个类似的包管理工具，依赖bower.json文件，但是bower是一个nodejs程序，我们需要先使用npm将其安装到全局去，才能执行这个命令。bower这东西，我不是很喜欢，因为它的引用库是git库，实现类似<code>git submodule</code>的作用，时常不好连接，而且有些仓库也有被废用的情况，这也是我另外几个项目成功不了的原因，连依赖都下不到了，更别谈构建了。<br><code>grunt</code>也是一个nodejs程序，依赖配置文件<code>Gruntfile.js</code>，属于web构建工具之一，类似的还有如gulp、webpack等等，实际上Web的构建工具在开发界最多了。什么是构建工具呢？实际上就是依赖配置文件运行的nodejs程序，它的功能是多方面的，比如我们的grunt用于构建静态页面，我们的生成目录是dist</p>
+
+<img align="center" src="./p5.png" />
+
+<p>其中的<code>index.html</code>就是我们的入口界面了。这个dist文件夹可以作为网站的文件夹部署到服务器上，然后在用户请求的时候，运行到用户浏览器上。我们用原生的环境来讲就是，kityminder是我们的源代码文件夹，dist是生成的可执行文件，而构建工具相当于编译器，……，等等那nodejs难道相当于操作系统？有点夸张了，有点夸张了，但是nodejs使js这门语言具备了更多与本地交流的能力，确实已经奠定了它具备开发平台的潜力。实际上，typescript(ts)也是一个类似的东西，它也有nodejs版本的程序，也可以看成构建工具的一种，它的作用是将ts代码翻译为js代码。<br>nodejs有多强大呢？这里再提一个项目，electron，它也是nodejs程序，但它能令你用web三套件开发本地应用，我们常用的VisualStudioCode就是用它开发的，很神奇吗？其实理解原理后，不禁感叹，也不过如此。其实它并不是真的会生成机器码运行，而是和许多开发语言一样，通过虚拟机来实现。<br>nodejs工程的文件结构一般都不是固定的，除了<code>package.json</code>，其中会包含各种子项目，如grunt、ts等。为什么nodejs的开发生态会如此复杂多变，确实是一个令人费解。</p>
+<h1 id="实际意义"><a href="#实际意义" class="headerlink" title="实际意义"></a>实际意义</h1><p>如果只是完成上面那些步骤，然后运行，其实是不行的，会出现登入验证、非标准API缺失等问题。不过，既然这是开源的，想改其实还是很简单的，网上已经有相关的教程了，我们实际操作一番后，Web程序已经完美的跑起来了</p>
+
+<img align="center" src="./p6.png" />
+
+<p>不过启动本地服务器的时候应该使用php，因为在静态文件中，我们看到download.php，它主管思维导图导出(即下载)的功能，当然我们可以自己用js(node中的)重写一遍就是了。<br>如果觉得，自己构建项目，修改静态文件很复杂的话，其实已经有别人修改过的项目了——<a target="_blank" rel="noopener" href="https://github.com/NaoTu/DesktopNaotu">DesktopNaotu</a>，我们只推荐下载它Release的东西，我试过去构建它，结果其中一个bower的依赖在git上已经没了，办法是找到依赖的地方，想办法用其它东西代替，但这样过于麻烦，所以就不管了，而且功能基本差不多，直接用Release就足够了。<br>在开始项目改建前，我们来看看这个团队的其它开源产品。<br><a target="_blank" rel="noopener" href="https://github.com/fex-team/kityminder">kityformula</a>是数学的公式编辑器，相比与一般的latex编辑器，最大特点在于可视化比较强一些</p>
+
+<img align="center" src="./p7.png" />
+
+<p>当然强大程度肯定比不上依靠特殊语法的latex就是了。<br><a target="_blank" rel="noopener" href="https://github.com/fex-team/ueditor">ueditor</a>是一个富文本编辑器，类似于word的功能，但我还是想说已经哪一种富文本编辑器都比不上我们的排版神器latex。随便说说而已，从易用性角度的话，肯定是选择那些大众化的工具了</p>
+
+<img align="center" src="./p8.png" />
+
+<p>构建几次后发现，这个团队还真喜欢用grunt构建工具，基本每个项目都是。</p>
+<h1 id="改造思路"><a href="#改造思路" class="headerlink" title="改造思路"></a>改造思路</h1><p>粗略地看一下这个工程，发现构建大部分是拷贝与替换的过程，与模板语言差不多，所以我们直接关注dist，即输出文件的内容。<br>我们稍微使用一下这个Web程序可以发现，核心的布局文件只有<code>index.html</code>和<code>edit.html</code>，前者是我们刚进入程序的欢迎界面，属于UI部分，没有什么功能性的东西，改不改其实是无所谓的，唯一有改动的就是之前那个用来绕开验证的东西</p>
+
+<img align="center" src="./p9.png" />
+
+<p><code>edit.html</code>是我们编辑器的主要界面</p>
+
+<img align="center" src="./p10.png" />
+
+<p>在body内我们发现只有脚本文件，也就是界面的排布全部由脚本完成，前两个是我们添加的，后两个是无关紧要的，也就是说此程序的核心在“脑图启动”的代码里。其中jquery代码，一个用于加载外部脚本，一个用于版号输出，都不是很重要，关键的代码是中间的两句话，就两步，获得实例，绘制UI，而这些实际上是属于kitymind-core的东西，我们拿出官网的东西来看看脑图的结构</p>
+
+<img align="center" src="./p11.png" />
+
+<p>其中kity是矢量图形库，在lib里面，最好不要去修改，牵连的东西太多，kitymind-core位于目录<code>src/core</code>里面，加上其它部分代码组成kitymind-editor，配合其它配置和页面布局，就组成了我们的Web应用，获得引用的代码在<code>src/core/kityminder.js</code>里面，界面UI的布局则主要集中在<code>ui/</code>里面。<br>由于没有具体的目标，所以我们仅给出修改的思路。如果需要将脑图程序嵌入页面中的话，加入两段代码到需要位置，引入相关的库即可。如果需要调整布局，则可以在<code>ui/</code>里面进行研究修改。如果要修改核心的话，则研究<code>src/</code>文件夹，不过研究难度会更大一点。<br>就说这么多吧，这个项目实在太老了，拿来进行简单的应用，问题是不大的，但拿来进行实际开发还是不太合适的，从便利的角度，我选择DesktopNaotu。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6%E8%84%91%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">百度脑图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nodejs%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">nodejs简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A5kityminder%E4%B8%BA%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">以kityminder为例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%84%8F%E4%B9%89"><span class="nav-number">4.</span> <span class="nav-text">实际意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%B9%E9%80%A0%E6%80%9D%E8%B7%AF"><span class="nav-number">5.</span> <span class="nav-text">改造思路</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="逯晓零"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">逯晓零</p>
+  <div class="site-description" itemprop="description">自由之地 创造一切</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+
+     <!--
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    -->
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LiXing48" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LiXing48" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">逯晓零</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
