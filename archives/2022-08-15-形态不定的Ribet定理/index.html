@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>形态不定的Ribet定理 | 虚空之地</title><meta name="keywords" content="数学,定理"><meta name="author" content="逯晓零"><meta name="copyright" content="逯晓零"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在费马大定理证明过程中，一个重要的步骤是Ribet定理，但通常情况下，人们印象中的其实是它的一个推论，在Ribet的论文里，我们可以找到主要定理和它的推论    推论说的是如果证明Q上的椭圆曲线是模的(其实就是谷山-志村定理)，则费马大定理成立。其实推论没啥，问题在于这个可以被称为Ribet定理的主定理，原始定理的叙述比较古老，所以我们应该看一些比较现代的叙述，但一看反而让我对这个定理的内容越来越">
+<meta property="og:type" content="article">
+<meta property="og:title" content="形态不定的Ribet定理">
+<meta property="og:url" content="http://example.com/archives/2022-08-15-%E5%BD%A2%E6%80%81%E4%B8%8D%E5%AE%9A%E7%9A%84Ribet%E5%AE%9A%E7%90%86/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="在费马大定理证明过程中，一个重要的步骤是Ribet定理，但通常情况下，人们印象中的其实是它的一个推论，在Ribet的论文里，我们可以找到主要定理和它的推论    推论说的是如果证明Q上的椭圆曲线是模的(其实就是谷山-志村定理)，则费马大定理成立。其实推论没啥，问题在于这个可以被称为Ribet定理的主定理，原始定理的叙述比较古老，所以我们应该看一些比较现代的叙述，但一看反而让我对这个定理的内容越来越">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-08-15T04:04:16.000Z">
+<meta property="article:modified_time" content="2022-10-14T23:47:07.909Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="定理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/archives/2022-08-15-%E5%BD%A2%E6%80%81%E4%B8%8D%E5%AE%9A%E7%9A%84Ribet%E5%AE%9A%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '形态不定的Ribet定理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-10-15 07:47:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">虚空之地</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">形态不定的Ribet定理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-15T04:04:16.000Z" title="发表于 2022-08-15 12:04:16">2022-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-14T23:47:07.909Z" title="更新于 2022-10-15 07:47:07">2022-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%84%9F%E6%82%9F/">感悟</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在费马大定理证明过程中，一个重要的步骤是Ribet定理，但通常情况下，人们印象中的其实是它的一个推论，在Ribet的论文里，我们可以找到主要定理和它的推论</p>
+
+<img align="center" src="./p5.png" />
+
+<p>推论说的是如果证明Q上的椭圆曲线是模的(其实就是谷山-志村定理)，则费马大定理成立。其实推论没啥，问题在于这个可以被称为Ribet定理的主定理，原始定理的叙述比较古老，所以我们应该看一些比较现代的叙述，但一看反而让我对这个定理的内容越来越模糊了。首先是我学习模形式的书籍</p>
+
+<img align="center" src="./p1.png" />
+
+<p>虽然一笔带过了，主要讲的Serre的模猜想，这里我不得不提一嘴，国内的百科真不靠谱，国内搜索Serre猜想，只是随便拿一个出来讲讲，讲得还不清不楚的，最后还是得靠维基百科</p>
+
+<img align="center" src="./p6.png" />
+
+<p>叫法并不重要，只要是Serre提出的猜想都可以叫Serre猜想，但不做区分，不叙述具体的内容，谁知道你是不是在胡说八道。我们探究的是Serre的模猜想，在wiki上有详细的叙述</p>
+
+<img align="center" src="./p7.png" />
+
+<p>比较让人在意的是absolutely irreducible，有人给出翻译叫<strong>绝对不可约</strong>，甚至莫名其妙在国内还能找到<strong>绝对不可约表示</strong>的定义，即扩域保持不可约性。但我认为是错的，这里的absolutely指的是域Q导出绝对(absolute)Galois群，我看过相关定理的证明，其中只用到了不可约性，并没用的<strong>所谓的绝对不可约性</strong>，另一方面从我目前所看的教程，它只要求表示是奇不可约的，并没要求什么绝对不可约。一个不好的习惯甚至带到了Ribet定理的wiki叙述</p>
+
+<img align="center" src="./p3.png" />
+
+<p>比较有趣的是我参考的另一本书</p>
+
+<img align="center" src="./p2.png" />
+
+<p>这是一本模形式理论汇总的书，在费马大定理证明概要，它给出这样的Ribet定理，然后又在后面给出了正确的形式</p>
+
+<img align="center" src="./p4.png" />
+
+<p>可以发现它并没有给出绝对不可约的条件，其实最让我不爽的是，有些人的胡乱科普，比如有些人读了这本书的开头概要，就以为自己会证明了，还给出来一个错误的翻译</p>
+
+<img align="center" src="./p8.png" />
+
+<p>虽然有人会觉得我以小人之心度君子之腹，那我举个很明显的问题，这个定理的第二句话，<code>l=p且表示在p处平坦</code>，先不论它整篇文章没有给出一个表示在某点平坦的定义，光这里莫名其妙给出的p就有些问题了，为什么这句话不直接写成<code>表示在l处平坦</code>，如果去翻原文的话，就会知道p是有具体含义的，Galois表示对应的有限域的特征。而我看了整篇文章，它没有全局声明，就是像“以后用f表示函数”,“以后用E表示椭圆曲线”这样的说法，也没有在定理里面指出来，相比之下有一本高等科普书倒表现得比较好</p>
+
+<img align="center" src="./p11.png" />
+
+<p>但然它这里综合了两个人的结果，第一句就是我们Ribet定理，而且也没有绝对不可约的条件，但这本书也有一些令难受的东西，就是翻译，这本书虽然是现代数学基础丛书，但它其实是从日语翻译过来的，甚至因为翻译导致出现了一个叫<strong>模椭圆曲线</strong>的东西</p>
+
+<img align="center" src="./p13.png" />
+
+<p>如果去看日语的原文的话，这么翻译也没啥问题</p>
+
+<img align="center" src="./p12.png" />
+
+<p>但是如果真地要去深究出处，也就发源地英语的话，正确的叙述应该是这样的</p>
+
+<img align="center" src="./p14.png" />
+
+<p>这个“modular”可以翻译成模的，连起来就是“模的椭圆曲线”，简化一下读成“模椭圆曲线”，好像也没什么问题。无歧义确实没什么问题，但关于“modular”确实存在一种奇异的情况，在下面这种情况</p>
+
+<img align="center" src="./p15.png" />
+
+<p>讲的是一个表示是模的，也就是“模的表示”，简化一下就变成了“模表示”，但确实存在模表示(modular representation)这个东西</p>
+
+<img align="center" src="./p16.png" />
+
+<p>前者表示与模形式存在关系的表示，后者的话说得却是有限群满足域的特征整除阶的表示，是两个完全不同的东西，都叫成模表示难免有点说不过去，而说成“这个表示是模的”。与此同理，我认为不应称什么模椭圆曲线，而应该说成“这个椭圆曲线是模的”，而且确实有个国人的想法和我差不多</p>
+
+<img align="center" src="./p17.png" />
+
+<p>当然他的翻译感觉读起来更顺口，至于民间流传模椭圆曲线其实还好，更离谱的是有人还流传<em>模曲线</em>和*模形式化(即被模函数参数化)*之类的说法，前者是确实存在的一种由同余子群导出的紧黎曼曲面，而后者曲线被函数参数化是确实存在的，但模性定理说得是对应关系，并且对应关系中存在一些量的相等，真正把椭圆曲线参数化的是魏尔斯特拉斯函数，它是一种椭圆函数，而不是模形式。很多的科普视频跟没科普一样</p>
+
+<img align="center" src="./p18.png" />
+
+<p>我知道为什么？因为Ribet定理，不仔细研究还真不知道该怎么表示，干脆直接拿个推论算了，比如费马大定理与模性定理矛盾，与Frey曲线矛盾之类的。有人可能会说科普的都是大众，但如果不是搞数学的谁会闲着没事去看费马大定理，而且拿出椭圆曲线，模形式化之类的名词，不加解释，随便地拿来用。你说模形式化，但谁都不知道它是什么意思，而且Ribet定理为啥加个模性定理就推出费马大定理，哦，因为你就是这么写的。所以我对Ribet定理很无语，有这种原始版本的转述</p>
+
+<img align="center" src="./p10.png" />
+
+<p>还有这种经过现代加工的东西</p>
+
+<img align="center" src="./p9.png" />
+
+<p>为什么我会觉得Ribet定理的科普有问题，因为我觉得这叫科普历史，不叫科普证明，因为你给的Ribet定理相当于在说明上下文，不是什么推出的关系。而且反证的逻辑线也有问题，正确的应该是下面这个</p>
+
+<img align="center" src="./p19.png" />
+
+<p>而且上面那个科普还有一个问题，它说方程不可能有解，显然有问题，首先实数解是存在的，(0,0,0)也是它的一组解，所以真正完整的叙述是没有非平凡(nontrivial)整数解。有人可能会说，科普视频那么严谨干嘛，但我认为正因为是科普才要严谨，否则会给读者传递错误的知识，在数学上有些东西是反直觉的，如果依旧以模糊的方式科普，在错误的路上越走越远，干脆就被科普了。其实有位数学家说得很对，数学是拿来建立正确直觉的，而不是让人在错误的直觉上顽固不化。<br>有人可能觉得为啥通篇基本都是英文，因为没办法，前沿的科学基本都是用英文写的，而且大量都没有翻译，而且像数学这种概念套得十分深的学科，强行翻译的话，很容易引起像我上面所说的那些歧义，甚至直接导致错误的知识流传。还有一点是数学存在大量的证明，而且基本被承认以后都不会有人去看了，所以有些人在搬运定理的时候，可能直接抄过来，也不看看具体的内容和上下文，结果搞得定理搬来搬去都搬得莫名其妙了。其实，在我看来数学应该是可以建立一种通用语的，随便编一个通用语词典，不过看起来还很遥远就是了，主要还是搞数学的没精力，有精力的看不懂数学，还真是一个难以解决的矛盾。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B0%E5%AD%A6/">数学</a><a class="post-meta__tags" href="/tags/%E5%AE%9A%E7%90%86/">定理</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">逯晓零</div><div class="author-info__description">我喜欢简洁，仅此而已。</div></div><div class="card-info-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-10-01-%E6%9D%82%E8%B0%88%EF%BC%9A2023-10-01/" title="杂谈：2023.10.01">杂谈：2023.10.01</a><time datetime="2023-10-01T09:15:46.000Z" title="发表于 2023-10-01 17:15:46">2023-10-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-09-03-%E6%88%91%E8%BF%98%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/" title="我还想做的事">我还想做的事</a><time datetime="2023-09-02T23:41:56.000Z" title="发表于 2023-09-03 07:41:56">2023-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-07-27-%E9%AD%94%E7%BE%A4%E6%9C%88%E5%85%89/" title="魔群月光">魔群月光</a><time datetime="2023-07-27T07:34:21.000Z" title="发表于 2023-07-27 15:34:21">2023-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 逯晓零</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>

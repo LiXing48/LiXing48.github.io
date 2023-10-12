@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>学点新东西之量子化学计算 | 虚空之地</title><meta name="keywords" content="未知,理解"><meta name="author" content="逯晓零"><meta name="copyright" content="逯晓零"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="最近读怀尔斯关于半稳定模性定理的证明有些厌烦了，于是我们来学点新的东西吧，最终我锁定以一个看起来比较有趣的东西，就是这玩意，量子化学计算。 理解理论虽然这只是一个编程的事，完成代码就行了，但是不理解原理的话，就会轻易地被各种名词给绕晕，完全不知道自己干了什么。其实这个比赛，只是之前已有比赛的打榜活动，题目基本一致，换了数据集，然后使用上一次比赛的比较好的算法作为模板，并以此为基础将优化作为比赛目的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学点新东西之量子化学计算">
+<meta property="og:url" content="http://example.com/archives/2022-10-01-%E5%AD%A6%E7%82%B9%E6%96%B0%E4%B8%9C%E8%A5%BF%E4%B9%8B%E9%87%8F%E5%AD%90%E5%8C%96%E5%AD%A6%E8%AE%A1%E7%AE%97/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="最近读怀尔斯关于半稳定模性定理的证明有些厌烦了，于是我们来学点新的东西吧，最终我锁定以一个看起来比较有趣的东西，就是这玩意，量子化学计算。 理解理论虽然这只是一个编程的事，完成代码就行了，但是不理解原理的话，就会轻易地被各种名词给绕晕，完全不知道自己干了什么。其实这个比赛，只是之前已有比赛的打榜活动，题目基本一致，换了数据集，然后使用上一次比赛的比较好的算法作为模板，并以此为基础将优化作为比赛目的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-09-30T22:18:14.000Z">
+<meta property="article:modified_time" content="2022-10-14T23:47:07.848Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="未知">
+<meta property="article:tag" content="理解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/archives/2022-10-01-%E5%AD%A6%E7%82%B9%E6%96%B0%E4%B8%9C%E8%A5%BF%E4%B9%8B%E9%87%8F%E5%AD%90%E5%8C%96%E5%AD%A6%E8%AE%A1%E7%AE%97/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '学点新东西之量子化学计算',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-15 07:47:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">虚空之地</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">学点新东西之量子化学计算</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-30T22:18:14.000Z" title="发表于 2022-10-01 06:18:14">2022-10-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-14T23:47:07.848Z" title="更新于 2022-10-15 07:47:07">2022-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%90%86%E5%AD%A6/">理学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>最近读怀尔斯关于半稳定模性定理的证明有些厌烦了，于是我们来学点新的东西吧，最终我锁定以一个<strong>看起来</strong>比较有趣的东西，就是这玩意，<a target="_blank" rel="noopener" href="https://competition.huaweicloud.com/informations/mobile/1000041745/introduction?track=111">量子化学计算</a>。</p>
+<h1 id="理解理论"><a href="#理解理论" class="headerlink" title="理解理论"></a>理解理论</h1><p>虽然这只是一个编程的事，完成代码就行了，但是不理解原理的话，就会轻易地被各种名词给绕晕，完全不知道自己干了什么。其实这个比赛，只是之前已有比赛的打榜活动，题目基本一致，换了数据集，然后使用上一次比赛的比较好的算法作为模板，并以此为基础将优化作为比赛目的。综究，两次比赛的模板有较大差别，不懂得原理的话，想将上一次选手的代码搬运过来都不是简单的事。总之，我们理解理论基础是必需的，不然像下面这样的题目</p>
+
+<img align="center" src="./p1.png" />
+
+<p>也完全不知道到底要干什么。从所有已知的信息来看，我们需要学习两个东西，量子计算机的基本架构和量子化学的基本原理。</p>
+<h1 id="量子计算"><a href="#量子计算" class="headerlink" title="量子计算"></a>量子计算</h1><p>量子计算机像是个大饼，基础理论在20世纪就已经有了，但实际制作却有着极大的环境限制，特别是低温环境、低比特等，想要投入日常还有好长的路要走。但真的需要学量子力学吗？笔者虽然学过一些，但以笔者的观点来看，比起物理，它更像数学，准确来说，你可以理解数学上的量子力学，但你不应该说自己理解现实的量子力学。当然理论大饼还有好多，实际能投入应用的也真不多，主要还是人类对自然的控制力还不够大，回归正题，我们需要理解什么呢？<br>先从现代的电子计算机说起，并且我们来考虑计算机最原始的作用，数学计算。主要原理是微观电路，使用电路的通断实现0,1的数字模拟，所以进位制的数字都是等价的，因此进行二进制运算和进行十进制运算是一样的。运算实际就是电路状态的一种转化，两条电路接入一个门电路以后，另一段可以输出门运算的结果，而这种运算依赖于，在低电压环境下晶体管的特殊性质，比如二极管的单向导通，通过特定的组合可以形成各种门电路，通过数学的基本原理可以知道，门运算完全可以模拟四则运算。这样借助电路的高速流通，我们可以实现一般意义上的电子计算器。这些都是众所周知的事情，计算机的另一项重要技术是编解码，通过对二进制信息的解码理解，有些外置设备可以由此实现不同的表现效果，从而构成了现代家用计算机的基础。<br>计算机的基本构件无非三个，可控的状态表示物、可以改变此物状态的控制原件和对状态的解释原件。量子计算机使用的状态表示物，只要是微粒基本都可以，比如“九章”使用的是光量子，就是我们常见的那个光了，至于怎么让它如我们所愿去流动，只能说如果我知道的话，早就去当研究人员了，其实我一直觉得工科比理科重要太多，理论是一回事，怎么在现实中实现则是件更困难的事了，它可没有理论中那么美好的假设。而量子比特的状态，使用<code>|0&gt;</code>和<code>|1&gt;</code>，似乎与经典计算机没区别，但实际还有一种叠加态<code>|φ&gt;=a|0&gt;+b|1&gt;</code>，其中ab满足归一化条件<code>a²+b²=1</code>，而状态的测量，则依靠哈密顿算子<code>&lt;φ|H|φ&gt;</code>，怎么实现不是我们这种一般人考虑的问题。另一部分则是“量子门”，用来改变此物状态的控制器，以目前对量子力学的理解能实现较多的门控制器，相比传统计算机的与、或、非，量子计算机有X门、Y门、Z门、Hadamard门、CNOT门以及旋转门RX门、RY门和RZ门。X门有非门的作用，可以将量子态<code>|0&gt;</code>转化为<code>|1&gt;</code>、<code>|1&gt;</code>转化为<code>|0&gt;</code>。想要理解这些量子门，最好从量子力学的矩阵表示来解读，对于一比特的量子，我们使用二维向量来表达两个量子态上的分量，于是</p>
+
+<img align="center" src="./p2.png" />
+
+<p>另外对于多量子比特，比如2比特的<code>|00&gt;</code>、<code>|01&gt;</code>、<code>|10&gt;</code>和<code>|11&gt;</code>，则可以使用张量积来生成</p>
+
+<img align="center" src="./p3.png" />
+
+<p>而相应的量子门，表示向量间的转化，于是可以用矩阵来表示</p>
+
+<img align="center" src="./p4.png" />
+
+<p>其中H表示Hadamard门</p>
+
+<img align="center" src="./p5.png" />
+
+<p>其中旋转门带有参数，而CNOT门是作用于两个量子比特的门，通过一个量子比特来表示另一个量子比特是否执行X门。此时量子比特通过一个门，可以表示为矩阵的乘法，比如X门</p>
+
+<img align="center" src="./p6.png" />
+
+<p>有些人说，量子计算机因为具有叠加的性质，数据量随比特数呈指数增长，因此有极大算力，这种说法是有问题的，存储能力的增加并不代表计算能力的增加，量子计算机的强大在于比特间通过矩阵所实现的并行运算，但这和GPU的并行运算有本质的区别，显卡是通过多个计算单元在统一的指令下实现的并行计算，实际是以量来取代速度，但量子计算机则是纯正的矩阵运算，它是单核实现的并行运算。简单来说，比如计算下面矩阵积</p>
+
+<img align="center" src="./p7.png" />
+
+<p>传统电子计算机，需要完成4个任务，<code>1×4+2×2</code>,<code>1×3+2×1</code>,<code>3×4+4×2</code>和<code>3×3+4×1</code>，由于它们之间的计算互不干扰，所以可以分别用四个计算单元来并行运算，现代人工智能的主流——深度学习，还有就是现代游戏高端渲染的图形学，常用的运算就是矩阵计算，也因此GPU在这些领域大放光彩。如果放到量子计算机的话，矩阵运算就是它的天然运算，计算速度自然也是成倍的增长，这差不多就是量子计算的简单秘密。由于量子计算机，我们用不到，所以只能拿框架依据原理来模拟，参考文档在<a target="_blank" rel="noopener" href="https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.7/index.html">这里</a>。</p>
+<h1 id="量子化学"><a href="#量子化学" class="headerlink" title="量子化学"></a>量子化学</h1><p>接下来我们要进入我们的重点了，<strong>量子化学</strong>，简单来说，它就是研究怎么解薛定谔方程的学科，通常情况下，我们要解的是对不同分子体系的定态薛定谔方程</p>
+
+<img align="center" src="./p8.png" />
+
+<p>其中<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="2.009ex" height="2.378ex" role="img" focusable="false" viewBox="0 -1051 888 1051" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D43B" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 219 683Q260 681 355 681Q389 681 418 681T463 682T483 682Q499 682 499 672Q499 670 497 658Q492 641 487 638H485Q483 638 480 638T473 638T464 637T455 637Q416 636 405 634T387 623Q384 619 355 500Q348 474 340 442T328 395L324 380Q324 378 469 378H614L615 381Q615 384 646 504Q674 619 674 627T617 637Q594 637 587 639T580 648Q580 650 582 660Q586 677 588 679T604 682Q609 682 646 681T740 680Q802 680 835 681T871 682Q888 682 888 672Q888 645 876 638H874Q872 638 869 638T862 638T853 637T844 637Q805 636 794 634T776 623Q773 618 704 340T634 58Q634 51 638 51Q646 48 692 46H723Q729 38 729 37T726 19Q722 6 716 0H701Q664 2 567 2Q533 2 504 2T458 2T437 1Q420 1 420 10Q420 15 423 24Q428 43 433 45Q437 46 448 46H454Q481 46 514 49Q520 50 522 50T528 55T534 64T540 82T547 110T558 153Q565 181 569 198Q602 330 602 331T457 332H312L279 197Q245 63 245 58Q245 51 253 49T303 46H334Q340 38 340 37T337 19Q333 6 327 0H312Q275 2 178 2Q144 2 115 2T69 2T48 1Q31 1 31 10Q31 12 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path><path id="MJX-1-TEX-N-5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><use data-c="1D43B" xlink:href="#MJX-1-TEX-I-1D43B"></use></g><g data-mml-node="mo" transform="translate(513.8,257) translate(-250 0)"><use data-c="5E" xlink:href="#MJX-1-TEX-N-5E"></use></g></g></g></g></g></svg></mjx-container>是哈密顿算符，它有两部分相加，表示动力学的部分<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.798ex" xmlns="http://www.w3.org/2000/svg" width="6.845ex" height="3.087ex" role="img" focusable="false" viewBox="0 -1011.8 3025.4 1364.5" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-N-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path id="MJX-1-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-1-TEX-I-1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path><path id="MJX-1-TEX-I-1D6E5" d="M574 715L582 716Q589 716 595 716Q612 716 616 714Q621 712 621 709Q622 707 705 359T788 8Q786 5 785 3L781 0H416Q52 0 50 2T48 6Q48 9 305 358T567 711Q572 712 574 715ZM599 346L538 602L442 474Q347 345 252 217T157 87T409 86T661 88L654 120Q646 151 629 220T599 346Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2212" xlink:href="#MJX-1-TEX-N-2212"></use></g><g data-mml-node="mfrac" transform="translate(778,0)"><g data-mml-node="mi" transform="translate(495.1,481.4) scale(0.707)"><text data-variant="italic" transform="scale(1,-1)" font-size="884px" font-family="serif" font-style="italic">ħ</text></g><g data-mml-node="mrow" transform="translate(220,-345) scale(0.707)"><g data-mml-node="mn"><use data-c="32" xlink:href="#MJX-1-TEX-N-32"></use></g><g data-mml-node="mi" transform="translate(500,0)"><use data-c="1D45A" xlink:href="#MJX-1-TEX-I-1D45A"></use></g></g><rect width="1174.4" height="60" x="120" y="220"></rect></g><g data-mml-node="mi" transform="translate(2192.4,0)"><use data-c="1D6E5" xlink:href="#MJX-1-TEX-I-1D6E5"></use></g></g></g></svg></mjx-container>和表示所受势能常的部分<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-1-TEX-I-1D449"></use></g></g></g></svg></mjx-container>，总结写成如下形式</p>
+
+<img align="center" src="./p9.png" />
+
+<p>我们需要方程的基态能量<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.729ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 764 680" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path id="MJX-1-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D438" xlink:href="#MJX-1-TEX-I-1D438"></use></g></g></g></svg></mjx-container>，由于波函数我们是不知道的，我们只能通过分子构型给出势能场，主要电磁力场，而对于其它三种力，引力由于质量过小可以忽略，而化学往往将原子核作为一个整体考虑其与其它电子和原子核的作用，核内质子与中子之间强力可以不用考虑，而弱力存在于衰变元素中，量子化学考虑的都是稳定可拿来运用的元素，因此也不做考虑，对于多原子分子体系，其展开薛定谔方程如下</p>
+
+<img align="center" src="./p10.png" />
+
+<p>如果考虑量子场所在的希尔伯特空间，我们通过哈密顿算符矩阵表示的特征值来得到基态能量，而不需要波函数，这其实就是矩阵理论中求特征值和特征向量的过程。所以目前解方程的难点集中于哈密顿算符上，向前迈出的第一步是BO近似，即将原子核与电子进行体系分离，主要因为两者的量级差别大，对互相的影响不大，最开始的波函数是整个分子体系的叠加，分离以后，我们会得到电子和原子核两个量子体系方程。原子的性质由外层电子决定，因此我们主要考虑电子所在体系的薛定谔方程，而计算的也是这个体系的基态能量。接下来用很多的方法来求基态能量，比如HF、CCSD、FCI等，至于怎么做的也不重要，知道它是计算电子体系薛定谔方程的基态能量就行了。还有就是，基态能量有啥用吗？测不出来吗？什么的问题。基态能量，它受测不准原理的影响，对于物体的内禀性质，往往要依靠其它量来计算，比如速度，我们要通过同时测出路程和时间，然后相除来得到。但在量子体系中，有些量存在互斥性，不能同时得到，它们的误差积永远大于一个固定值，能量就是这样的存在。关于基态能量的作用，我也不太清楚，似乎是可以通过大量计算各种分子的基态能量来寻找合适的材料，而量子化学只需要分子构型就能完成计算。</p>
+<h1 id="VQE"><a href="#VQE" class="headerlink" title="VQE"></a>VQE</h1><p>随着分子量的不断增大，上述的算法，特别是比较精准的FCI，在传统计算机上，计算量呈指数增加，因此对于自然界广泛存在的大量大分子物质，计算速度不满足需求。其实我也很好奇，这些东西又不会变化，计算后再做一个数据库不就可以了，还寻求啥优化算法，越学就觉得学的东西越来越奇怪。人家机器学习要算法是因为数据总会变，但物质在怎么多，认识到的也是有限的，总会被时间搞定的，但后来我才知道，它的作用是用来为合成做指导的，通过遍历各种分子构型的能量，从而知道那些分子可能是稳定的，从而这个分子可以作为合成的路径点，这样我们寻找合成材料并非胡乱合成而是有了确切的方向。总之，提高计算基态能量的速度是有必要的，而VQE则是一种通过量子计算机来实现高速计算的方法，感觉是废话，难道有哪个算法放到量子计算机上是速度变慢的吗？当然它还说自己是一种量子-经典混合算法，不管它说什么，我们还是来研究一下原理，在MindQuantum的<a target="_blank" rel="noopener" href="https://www.mindspore.cn/mindquantum/docs/zh-CN/r0.7/vqe_for_quantum_chemistry.html">这个文档</a>下有稍作介绍，简单来说它有两个步骤，首先转化为一个量子参数学习过程，然后再学习相应的量子参数值，也就是说它的基于量子机器学习的优化算法，我们先来讲讲什么是量子机器学习。<br>我们可以先来看一看传统机器学习的框架</p>
+
+<img align="center" src="./p11.png" />
+
+<p>机器学习的模型实际就是一个<strong>带参数的可计算函数</strong>，一般模型开始时会随机生成参数，学习过程就是不断喂入数据计算，然后通过损失函数来评估结果，再通过反向传递的算法来更新参数，其中的每一步都有极大自由度，怎样的函数结构？怎么评估结果？如何根据结果来修改参数？我们可以看到机器学习的神经网络与人有较大差别，人的神经元网络结构随学习而改变，而机器学习的网络结构一般都是固定的，学习能改变的只是参数，当然实际上也有一些比较奇怪的算法来模拟神经元死亡之类的，但我们不过多关注。量子机器学习也是类似的存在，只是它的学习可以直接在电路上实现，传统计算机的门电路不带有可学参数，本身不具有可学习性，我们只能通过内存数据可变来模拟学习参数。但量子计算机的门电路天生带有参数，指的是旋转门，因此量子机器学习是在电路层面上的，这就是由量子电路组成的神经网络，而损失函数和更新算法则是在传统计算机上，总结如下图</p>
+
+<img align="center" src="./p12.png" />
+
+<p>两者的主要差别就是这个计算的函数，我们把量子计算机上的这个函数或电路称为<strong>量子线路</strong>，量子计算机的优势就是矩阵运算，而传统神经网络部分的计算核心也是矩阵，因此将这部分转化为量子线路是合理的，这只是从计算角度考虑，单纯考虑逻辑能力的话，还是传统计算机更加优秀成熟，这其实也是CPU优于GPU的地方，正因如此我们才会将损失函数放在传统计算机上。传统量子路线应该有三个部分，Encoder(编码)，即将训练数据转化为量子比特数据，Ansatz(拟设)，即我们主要的训练计算网络，里面还有相应的量子参数，Measure(测量)，即量子态数据转化为可用于传统电路的数据，传统计算机的冯诺依曼构造，有一个重要的部分是存储器，目前的量子存储器还处于开发难点期，所有如果想要保存数据的话，最终还是要放到传统计算机上，因此目前来看Measure是一个重要部分，不过说起来，量子计算机好像也还在梦里。<br>回到我们的VQE，我们不存在训练数据，也没有验证结果如何数据，这是种无监督学习，因此我们肯定要在传统结构上改革。VQE基于变分原理实现参数更新</p>
+
+<img align="center" src="./p13.png" />
+
+<p>我们使用<strong>参数决定函数</strong>来作为拟设，它是一个变分，而此变分的最小值是基态能量，我们的目标是得到这个变分决定参数，有些人可能没有学过数学上的变分原理，所以可能不是很理解。我们可以把它理解为一个求最小值所对应变量的过程，对于拟设，我们可以把它看为一个变参函数，我们只要让这个函数的值尽可能小就能越靠近基态能量，这样问题实际就是一个求最小值得过程，这是一个典型的无监督学习过程。转化为具体的过程大体如下。<br>先准备所需的量子比特，接着通过带参拟设量子路线，它相当于一个根据不同分子构型生成的一个带参函数，接着我们将得到的比特进行测量，通过一个计算过程它相当于由拟设得到的能量，进行一次优化算法，更新量子线路参数，反复计算我们就会离极小值越来越近。对于优化部分是传统计算机的求极值算法，不做过多讨论，我们看看这迷一般的拟设，比如拟设就是乱搭量子线路吗？肯定不是这样的，跟传统神经网络一样，对于特定的问题应该相应匹配的结构才能达到较好的效果，比如图片识别，肯定会用模拟视觉的卷积神经网络，语言相关肯定会用与记忆相关的循环神经网络。而用于求基态能量的VQE应该也要有相应的基础架构才对，乱搭肯定是没啥效果的。<br>当拟设量子线路是一个幺正耦合簇(UCC)时，VQE的计算效果比较好，你把它想象成有具体构造的量子线路，真要讲的话又是一大堆东西。在UCC基础上，效果更好的是UCCSD(Unitary coupled-cluster with singles and doubles)，而题目的要求其实就是要我们在uccsd基础上进一步设计量子线路。关于uccsd拟设我们再说点其它东西，它是一种量子线路生成算法，它会根据不同的分子构型，生成相应的带参量子线路，mindquantum提供了一个基础api函数generate_uccsd就是如此，它需要传入分子构型，而输出结果<code>ansatz_circuit,init_amplitudes, ansatz_parameter_names, hamiltonian_QubitOp,n_qubits, n_electrons</code>中，ansatz_circuit是拟设量子线路，n_qubits是需要的量子比特数。</p>
+<h1 id="实践操作"><a href="#实践操作" class="headerlink" title="实践操作"></a>实践操作</h1><p>学习的差不多了，我们来看看题目具体的代码模板吧，有了一定基础后，我们直接来看主要代码</p>
+
+<img align="center" src="./p14.png" />
+
+<p>在传入参数中，prefix只是一个分子名称，代表了分子的构型，主要传入uccsd预设，用于调节某个依分子改变细微参数，molecular_file是分子构型数据文件，就是一些数据的集合，可以使用HDFView打开</p>
+
+<img align="center" src="./p15.png" />
+
+<p>看起来有一大堆数据，主要是矩阵和列表两种，但真正用到的数据也不多，比如ccsd_××这样的数据属于ccsd计算过程中的一些数据，ccsd_energy则是对应计算出的能量，basis表示计算定位基矢类型，此处是sto-3g，它们最终包装为python中的MolecularData结构，下一句是初始化构造优化器，没做什么具体的内容，<code>run_pyscf</code>则是对molecule进行scf,ccsd,fci等算法并生成带有这些计算过程的MolecularData对象mol，其中1,0分别表示相应算法是否执行，这其实是为后面的uccsd做准备的，我们知道uccsd实际是一个机器学习算法，我们需要学习其中的参数，那么为了完成计算过程，初始化是必需的，从目前已知的研究来看，使用ccsd的结果、大于设为0、大于随机，因此我们在此处使用计算量较小且精度较高的ccsd，并对这个结果进行量子机器学习优化。下一步，<code>generate_circuit</code>即更具分子mol来生成相应的量子电路，里面就是我们主要要修改的地方。最后，<code>optimize</code>以固定精度进行优化迭代，在通过<code>en</code>返回结果，它集成了学习的所有过程，目前<code>1e-2</code>效果较好，没有太多可改的地方。我们来看看主要的电路部分</p>
+
+<img align="center" src="./p16.png" />
+
+<p>电路的第一步是X转化门，量子比特的初态都是0，为了后面便于使用此处先转化为了1，接下来就是重要的拟设部分，它都集成在了Uccsd_Generator内部，也就是说探索这里的内部才是优化的主要部分，后面生成量子线路模拟器并给优化器使用。这样，代码结构、需要做什么已经很清楚了，笔者在研究时发现了这个架构的不协调点，也正因如此笔者决定放弃继续研究这个东西了。从上一张图，笔者跑了一下这个基础模型，用了比较久的时间，最后得分456.96多，我们先来看一下这个评分标准</p>
+
+<img align="center" src="./p17.png" />
+
+<p>最开始就看到了，“与FCI方法计算结果进行比较”，基态能量不能直接测量，也就得不到如何评价算法优劣的指标了，于是比赛方干脆拿计算结果较好的FCI作为基准，这时我就想到了破绽在哪里，这样哪里有必要用那么多时间去进行量子学习优化，直接拿FCI计算结果不就行了吗，就像下面这样</p>
+
+<img align="center" src="./p18.png" />
+
+<p>看到没，我直接不做任何优化，直接把fci的结果返回给en，最后得分0.7180多，这和我电脑性能没什么关系，我就把这个东西直接提交过</p>
+
+<img align="center" src="./p19.png" />
+
+<p>我自己都觉得郁闷，1.1325确实低得有些离谱，其实这还不是最离谱的地方，通过之前的探索我们知道，为了通过Uccsd进行优化，我们需要先预算出ccsd能量，然后再进行逼近，但如果我们懒得逼近了，会怎么样呢</p>
+
+<img align="center" src="./p20.png" />
+
+<p>分数竟然离谱得更低了，简直优化了个寂寞，当然这样刷小聪明，不是什么值得称赞的事，我们必需清楚比赛方的意图。在此之前，我们先来解释一下为什么会有这样的结果，首先是ccsd的得分比fci高，通过日志文件</p>
+
+<img align="center" src="./p21.png" />
+
+<p>可以看到ccsd的运行时间比fci小很多，而在评分公式也可以发现，精度只要达标就行了，主要定位度量还是时间，好巧不巧的ccsd计算结果正好达到了要求的精度，num_err个数为零，结果就是单纯变成了时间的比拼，没错这其实才是关键所在，如今我们使用了三套体系计算基态能量，CCSD+量子线路、FCI和CCSD，由于这些算法全都达到了精度，于是在时间比拼上胜者必定是CCSD，但这显然不是比赛方的目的，回顾比赛的主题，我们发现应该是量子计算而是量子化学，而量子化学只是来表现量子计算的一部分而已。笔者猜测，它们应该是这样一种未雨绸缪的思想，当量子计算机真得实现的话，在有相当的精度下，CCSD+量子线路的时间应该是比FCI小，但这次精度的设计并不好，导致CCSD可以直接钻空子。其实不仅如此，我们还需明白为什么差距大得有些离谱，当然是我们吃力不讨好地用传统计算机来模拟量子线路的原因了，这样反而使得简单的算法变得更加复杂，从而导致时间被大量的浪费了。不过思来想去，可以从另外一个角度来看待这个问题，如果传统计算机都能达到较高速度，那量子计算机不就不得了了。我猜测正是因为这个原因，比赛方才会把时间作为评分的主要标准。<br>这里我们不得不提一下比赛得另一部分，虽然它已经过去很久了，且还没有打榜活动，但它却是以正确率作为评分标准，而且是一个很传统的手写体识别问题，如果用传统的算法实际上比什么量子线路正确率高太多了。其实这里主要是另一个目标了，就是在量子线路上提升智能性，这与我们的量子化学所考验的计算能力是不同的，也难怪得分是一起算的。正因为这些莫名其妙的情况太多了，涉及智能类的算法是，经常在决赛都有一个答辩环节，来看看你是否有造假的可能。所有笔者也不太喜欢参加这类比赛，虽说实际设计的时候，也不是胡乱搭建，有一定的逻辑思考，但怎么看运气成分还是有点大的，而且计算机还有浮点数据精度的限制，出现的问题太多了。再者，目前比较前沿的算法，运算量都比较大，在笔者手上的这个破电脑上跑起了还是太吃力了，有一次我跑了一个152深度的残差神经网络，跑了一半，内存直接溢出，电脑给卡死了，而且我还是关闭桌面系统linux上运行的，应该算是给出了所能给出的最大资源了，但依旧无济于事。总之，我算是给自己了一个退出学习的理由，不想搞了，除非哪天量子计算机真得到了我的手上。虽然笔者还未触及最精彩的部分——uccsd具体的内部结构，但已经没有什么前进的必要了。量子化学，我们有缘再见。<br><code>还有那个我随便耍耍的分数，不给更低的都不更新我的结果了，搞得我很难堪啊，难道只能删账号跑路了吗？</code></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%AA%E7%9F%A5/">未知</a><a class="post-meta__tags" href="/tags/%E7%90%86%E8%A7%A3/">理解</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">逯晓零</div><div class="author-info__description">我喜欢简洁，仅此而已。</div></div><div class="card-info-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E7%90%86%E8%AE%BA"><span class="toc-number">1.</span> <span class="toc-text">理解理论</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97"><span class="toc-number">2.</span> <span class="toc-text">量子计算</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%87%8F%E5%AD%90%E5%8C%96%E5%AD%A6"><span class="toc-number">3.</span> <span class="toc-text">量子化学</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#VQE"><span class="toc-number">4.</span> <span class="toc-text">VQE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E8%B7%B5%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">实践操作</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-10-01-%E6%9D%82%E8%B0%88%EF%BC%9A2023-10-01/" title="杂谈：2023.10.01">杂谈：2023.10.01</a><time datetime="2023-10-01T09:15:46.000Z" title="发表于 2023-10-01 17:15:46">2023-10-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-09-03-%E6%88%91%E8%BF%98%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/" title="我还想做的事">我还想做的事</a><time datetime="2023-09-02T23:41:56.000Z" title="发表于 2023-09-03 07:41:56">2023-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-07-27-%E9%AD%94%E7%BE%A4%E6%9C%88%E5%85%89/" title="魔群月光">魔群月光</a><time datetime="2023-07-27T07:34:21.000Z" title="发表于 2023-07-27 15:34:21">2023-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 逯晓零</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>

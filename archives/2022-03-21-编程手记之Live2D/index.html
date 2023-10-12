@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>编程手记之Live2D | 虚空之地</title><meta name="keywords" content="编程手记,渲染"><meta name="author" content="逯晓零"><meta name="copyright" content="逯晓零"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="在2D动画制作上，方法是很多的，比如Adobe系列软件，但我们更专注于将动画嵌入到游戏和软件中去。采用直接播放媒体文件的方式可行，但可控程度不高，不是我想要的。目前有两种比较常用的可控动画，它们是骨骼动画和Live2D动画，对于前者有付费的Spine和免费的Dragonbones，而后者主要是从美术布线和基本变形实现的，也是我们接下来要讨论的主题。 文件形式在使用任何开发型工具时，了解相关的文件格">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程手记之Live2D">
+<meta property="og:url" content="http://example.com/archives/2022-03-21-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8BLive2D/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="在2D动画制作上，方法是很多的，比如Adobe系列软件，但我们更专注于将动画嵌入到游戏和软件中去。采用直接播放媒体文件的方式可行，但可控程度不高，不是我想要的。目前有两种比较常用的可控动画，它们是骨骼动画和Live2D动画，对于前者有付费的Spine和免费的Dragonbones，而后者主要是从美术布线和基本变形实现的，也是我们接下来要讨论的主题。 文件形式在使用任何开发型工具时，了解相关的文件格">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-03-20T16:28:34.000Z">
+<meta property="article:modified_time" content="2022-10-14T23:47:08.298Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="编程手记">
+<meta property="article:tag" content="渲染">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/archives/2022-03-21-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8BLive2D/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '编程手记之Live2D',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-15 07:47:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">虚空之地</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">编程手记之Live2D</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-20T16:28:34.000Z" title="发表于 2022-03-21 00:28:34">2022-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-14T23:47:08.298Z" title="更新于 2022-10-15 07:47:08">2022-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>19分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>在2D动画制作上，方法是很多的，比如Adobe系列软件，但我们更专注于将动画嵌入到游戏和软件中去。采用直接播放媒体文件的方式可行，但可控程度不高，不是我想要的。目前有两种比较常用的可控动画，它们是骨骼动画和Live2D动画，对于前者有付费的Spine和免费的Dragonbones，而后者主要是从美术布线和基本变形实现的，也是我们接下来要讨论的主题。</p>
+<h1 id="文件形式"><a href="#文件形式" class="headerlink" title="文件形式"></a>文件形式</h1><p>在使用任何开发型工具时，了解相关的文件格式是十分必要的，这样有助于我们理解，文件存了什么，又能修改什么。我们使用的工具是Live2DCubism，其分为两部分Editor和Viewer，功能显而易见，软件3.0前后不兼容，所以我们讨论最新的版本。<br>cmo3(Cubism Model 3)，即Live2D模型文件，包含图像数据psd、网格数据、变形器数据、参数等。这里有必要稍微讲一下Live2D实现的基本原理，先来看一个基本的动作演示(Tampermonkey配合PicviewerCE+可以方便地看图)，</p>
+
+<iframe align="center" src="./g1.gif"></iframe>
+
+<p>也就是说Live2D动画的本质，是不同参数对应着不同的画面，当然我们不可能每一帧都有一张图片，所以我们实际使用的是补间动画，动画之间的过度是基础变化，平移、旋转、放缩等，只不过变化的基本单位不是一个图层那么简单，</p>
+
+<iframe align="center" src="./g2.gif"></iframe>
+
+<p>从这里我们可以看到，Live2D动画变化的基本单位其实是网格上的点，从中我们还可以发现一些基础变化的变形器，这就是整个Live2D动画的全貌了。<br>can3(Cubism Animation 3)，即Live2D动画文件，其关联一个cmo3模型文件，并在此基础上有一系列的场景(Scene)，简单来说就是一段动画，但其本质依旧是补间动画</p>
+
+<iframe align="center" src="./g3.gif"></iframe>
+
+<p>之前在模型文件里，我们通过参数来补间图形的动画，而在动画文件里，我们则通过在关键帧之间上对参数补间来实现一个场景。<br>cmo3和can3均属于Cubism的工程文件，不具有实用价值，我们使用的通常是它们的输出文件。can3集成的东西较多，并非核心，主要输出媒体文件视频，所以gif或mp4为主，这主要服务于美工人员。cmo3是整个Live2D构成的主体，技术核心集中于此，其输出为运行时文件，包括moc3、json和贴图png。与此同时，viewer所预览的也是这些运行时文件，开发所需的也是这些文件。类比Photoshop来思考的话，cmo3是psd，moc3是png，只不过Cubism的输出文件是好几个，其实如果用程序来思考的话，就是exe加一堆的dll。<br>moc3和model3.json互相引用，属于等价物，都是模型输出的主体，在view中不论打开谁都是一样的，在moc3中，我们可以调节工程中所设计的参数，来达到不同的图像表现。png是模型的贴图文件，实际就是psd的许多图层集中排在少数的图里来加快读取的，其它的json都是来辅助moc3的，没啥可控性。实际上can3也可以输出motion3.json文件，相当于整个动画的配置，可以运用到模型的输出moc3文件上去，实现某个动作(眨眼、点头等)。<br>在开发过程中，我们使用CubismSDK，所以主要读取的是模型的输出文件moc3，而我们可以控制的就是我之前所说的参数，然后来正式地看看它们吧。最后附上一张官方的工作流程图</p>
+
+<img align="center" src="./p1.png" />
+
+<h1 id="NativeSDK"><a href="#NativeSDK" class="headerlink" title="NativeSDK"></a>NativeSDK</h1><p>要想学习CubismSDK，最好的参考当然是<a target="_blank" rel="noopener" href="https://docs.live2d.com/">官方文档</a>，语言并不是障碍，实在不行不是还有机翻嘛。官方提供了manual(手册)和tutorials(教程)两种帮助文档，后者用于入门级的基本操作，前者则是类似字典的查询手册。</p>
+
+<img align="center" src="./p2.png" />
+
+<p>整个SDK的组成如上，其中Core是闭源的，只提供了头文件和库，主要完成对模型文件moc3的解析工作。Framework和Sample开源，前者完成渲染、演算和播放等操作，后者属于使用范例，工程使用C/Cpp开发，除了渲染部分具有良好的跨平台性。渲染在Sample中提供了cocos2d、opengl和directx三种方式，directx直接pass，cocos2d本质是opengl，所以我们接下来就主要来研究这部分工程。官方提供了Core部分的<a target="_blank" rel="noopener" href="https://docs.live2d.com/cubism-sdk-manual/cubism-core-api-reference/">API手册</a>，不过我们是懒惰的，单纯解析出数据对我们而言还是不够的，我们将使用进一步的封装Framework，渲染演算啥都不用考虑了，直接调用就完事了，美滋滋。</p>
+<h2 id="源码阅读"><a href="#源码阅读" class="headerlink" title="源码阅读"></a>源码阅读</h2><p>先运行一下这个程序</p>
+
+<img align="center" src="./p3.png" />
+
+<p>在Console中，我们可以看到一系列的输出，显然对应了渲染的过程，我们进入调试模式来跟踪程序的运行，看看整个流程如何</p>
+
+<img align="center" src="./p4.png" />
+
+<p>程序首先创建LAppDelegate的单例，代表着整个程序，在其中引用另外两个对象，LAppView代表我们所看到的视图，LAppTextureManager用于管理我们的贴图文件</p>
+
+<img align="center" src="./p5.png" />
+
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>接下来进入Initialize初始化阶段，前期主要是glfw创建窗口，gl的参数配置，属于渲染的基础部分</p>
+
+<img align="center" src="./p6.png" />
+
+<p>然后是对LAppView的初始化，主要计算渲染所需的两个矩阵viewMatrix和deviceToScreen，其实对于2D渲染来说也是有必要的，主要因为渲染的标准化坐标，对不同的屏幕有不同的表现，但也没3D那么复杂，只要2D世界坐标转化加屏幕坐标转化就足够了</p>
+
+<img align="center" src="./p7.png" />
+
+<p>接下来是Cubism引擎的初始化，步骤比较多，我们重点分析此部分内容。CubismFramework是一个静态函数库，是我们开发的主要部分，类似于opengl，它也是一个状态机。_cubismOption用于存储这个状态机StartUp(启动)的参数，这属于框架内的东西，按步骤来就行</p>
+
+<img align="center" src="./p8.png" />
+
+<p>状态机的初始化也属于框架内的东西，值得注意的是下一个LAppLive2DManager，虽然获得的单例，我们没有接住，但内部肯定包含实例的创建过程，而且这也不属于框架内</p>
+
+<img align="center" src="./p9.png" />
+
+<p>确实如我们所料，创建一个视图矩阵没啥好说的，引人注目的是ChangeScene，它显然是用来切换场景的函数，在这个实例中，右上角就有一个用来切换场景的按钮，而在这里将场景切换到0，相当于加载第一个场景了</p>
+
+<img align="center" src="./p10.png" />
+
+<p>前面没什么好说的，调试信息打印，获取模型的路径，释放所有模型。不过接下来好像有些麻烦，我们新建一个模型LAppModel，进入管理器的模型栈，并执行LoadAssets加载资源，但这个操作属于自建类，需要我们再进一步探索</p>
+
+<img align="center" src="./p11.png" />
+
+<p>以后调试说明直接跳过，然后是模型的读取和设置信息的读取，在这里我们需要实现CreateBuffer和DeleteBuffer，实际上我们要实现的是文件的读取，将其读到buffer，通过框架来创建setting，即解析后的数据</p>
+
+<img align="center" src="./p12.png" />
+
+<p>setting里包含许多数据，除了模型moc3，还有各种json。值得注意的是LAppModel继承自框架内的CubismUserModel类，LoadModel正是其用来加载模型的方法，这里的加载指的是从字节数据setting变成实在的模型数据类，而这个类就是LAppModel自己，他有一系列成员变量存储着这些信息，创建渲染器CreateRenderer属于框架内方法</p>
+
+<img align="center" src="./p13.png" />
+
+<p>在贴图载入这里，需要手动写一些东西，主要是贴图载入GPU的API是平台相关的，不能全写到框架内去，不过框架内也提供了相应的函数GetRenderer的BindTexture来简化流程，这个Renderer就是我们前一个方法创建出来的</p>
+
+<img align="center" src="./p14.png" />
+
+<p>最后这些，不是太重要，基本可以无视掉</p>
+
+<img align="center" src="./p15.png" />
+
+<p>这里projection矩阵的意义不明，函数内对象在函数结束就会销毁，UpdateTime计算帧率的函数，在渲染循环比较常见</p>
+
+<img align="center" src="./p16.png" />
+
+<p>初始化Sprite(精灵)，主要指的是模型以外的控件，比如切换按钮之类的，至于这里的Shader(着色器)，只是一个非常简单的贴图渲染器，至此初始化全部完成。</p>
+<h3 id="渲染循环"><a href="#渲染循环" class="headerlink" title="渲染循环"></a>渲染循环</h3><p>接下来就是常见的循环渲染流程</p>
+
+<img align="center" src="./p17.png" />
+
+<p>从中可以发现，view对象的Render是我们需要重点考虑的函数</p>
+
+<img align="center" src="./p18.png" />
+
+<p>这里总共渲染了四个东西，_back是背景，_gear是右上角切换的齿轮，_power是右下角结束程序的按钮，Live2DManager的OnUpdate是完成我们模型渲染的主要函数，至于下面的_renderTarget，我们之前在不重要部分那里，设置了None，所有并不会执行，如果真需要的话，主要是FrameBuffer的场景，如果2D的话，属实没必要</p>
+
+<img align="center" src="./p19.png" />
+
+<p>首先看有几个需要渲染的模型，然后放到for循环内逐个实现。对于单个模型渲染，先获取到model对象，然后计算投影矩阵projection，接着是draw部分。PreModelDraw和PostModelDraw没啥意义，重要的是Update和Draw，因为模型并非静止的，所以其动态数据在Update内计算完，然后通过Draw结束绘制，Draw可以在框架内完成，我们来看看Update到底更新了些什么数据</p>
+
+<img align="center" src="./p20.png" />
+
+<p>这里有许多东西都属于框架内，deltaTimeSeconds有于记录当前帧有多少秒，_dragX和_dragY记录鼠标点击的位置，这并不准确，如果你运行示例的话，长按鼠标并移动，模型会跟踪你移动的位置，松开后则记录此坐标并在下一次点击前都不会改变。LoadParameters即加载参数组，这就是我们之前在模型格式分析中所讲的参数，不同的参数对应不同的图形状态，事实上Live2D模型的本质其实是，多元变量到图片的连续映射。接着检验某个动作是否结束，结束的话随机再播放一个动作，未结束的话将动作更新delta时间。接着是eyeblink(眨眼)，它相当于一组特设参数，掌管特殊功能，与下面的唇语言同步同理</p>
+
+<img align="center" src="./p21.png" />
+
+<p>眨眼比较简单，直接UpdateParameters更新参数即可</p>
+
+<img align="center" src="./p22.png" />
+
+<p>expression(表情)也是一组特殊的参数</p>
+
+<img align="center" src="./p23.png" />
+
+<p>blend和value联合运算表示在默认值上进行运算，这里用UpdateMotion，就当是规定，不用管它。然后就是一组更加专一的参数更新，它们连ID名字都是固定的，其实你可以在任何一个模型上发现这一组参数，使用Add和Update更新参数的区别在于，前者直接使用绝对数值，后者相对当前数组进行变换，所以我们会发现执行UpdatePara的前后会有一个参数加载和保存的过程。breath和下面的pose一样，属于基本没怎么用过的东西，无关紧要的玩意</p>
+
+<img align="center" src="./p24.png" />
+
+<p>最后的部分，physics和pose基本不用，这里的物理演算，指的不是头发随风飘动之类的，而是提供碰撞框，但我们在开发过程中并不需要如此精细的碰撞框。lipSync则是wav语音与唇部动作同步用的，勉强还行，跟着写就完事了。一个画面分好几个部分的参数来渲染，其实这正是我们需要做的事情。至此源码的大体流程，我们了解的差不多了。</p>
+<h2 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h2><p>或许读完源码后，还有些头晕，让我们稍微梳理一下正个渲染应该做些什么吧。整个程序大体上就两个部分，初始化和循环渲染。<br><strong>在初始化阶段</strong>，我们首先要往常<strong>OpenGL</strong>相关的初始化配置，这部分没什么好说的。LAppView只是一个参数集合体，对于我们接下来的简单实例来说，是不需要的，当然平常开发的话，多做些封装是一个好习惯。接下来是<strong>CubismFrame</strong>的StartUp(启动)和Initialize(初始化)，直接调用框架内的函数即可。然后是模型数据的读取和解析，<strong>仿照Manager</strong>的ChangeScene即可。模型的数据会存储在LAppModel内，这部分与框架内核联系过于紧密，甚至直接继承框架内的类后，直接使用内部变量，所以<strong>LAppModel</strong>只能直接照搬。在LAppModel内引用了不少东西，我们一一来看，LAppDefine是常量集，包含众多可调参数，没有依赖，可以保留，LAppPal包含了文件读取，日志输出，时间记录等常用功能，只依赖LAppDefine，也可以保留，LAppWavFileHandler是音频文件读取类，依赖于前两个东西，可以保留，LAppTextureManager包含了图片读取(使用stb_image库)，将图片载入GPU等功能，懒得写的话，值得保留。剩下两个东西没有必要，我们直接去除。<br>在<strong>渲染阶段</strong>，就没有那么复杂了，在循环内完成OpenGL基础更新后，更新view即可，view内有四个东西更新，只有其中的model更新是我们需要的，其它的直接扔了吧。</p>
+<h2 id="实现案例"><a href="#实现案例" class="headerlink" title="实现案例"></a>实现案例</h2><p>说了这么多，我们来实际操作一下，看看如何应用于开发之中吧。</p>
+<h3 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h3><p>首先创建一个空白工程，配置好OpenGL的基础环境</p>
+
+<img align="center" src="./p25.png" />
+
+<p>进入Framework，对CMakeLists添加如下图的两句话，保证我们使用OpenGL作为引擎</p>
+
+<img align="center" src="./p26.png" />
+
+<p>然后使用CMake构建VS工程，先别急着构建，进入Rendering/OpenGL，打开CubismOffscreenSurface_OpenGLES2.hpp</p>
+
+<img align="center" src="./p27.png" />
+
+<p>把你的opengl头文件添加进去(这里使用glad)，实在不行用系统也行，只要有头文件就够了，因为我们生成lib文件，没有进行链接，然后构建，即可获得Framework.lib文件。最后把Framework的头文件全部拷入我们的工程，然后再拷入Core的头文件和lib文件，这样准备工作就完成了，大体架构如下</p>
+
+<img align="center" src="./p28.png" />
+
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>导入之前说的一些比较实用的类，然后大体写一个基本框架代码如下</p>
+
+<img align="center" src="./p29.png" />
+
+<p>至于全局变量还有些什么，等我们需要的时候再添加进去即可。<br>首先我们初始化Framework</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CubismFramework::Option cubismOption;</span><br><span class="line">    cubismOption.LogFunction = LAppPal::PrintMessage;</span><br><span class="line">    cubismOption.LoggingLevel = LAppDefine::CubismLoggingLevel;</span><br><span class="line">    CubismFramework::<span class="built_in">StartUp</span>(&amp;cubismAllocator, &amp;cubismOption);</span><br><span class="line">    CubismFramework::<span class="built_in">Initialize</span>();</span><br></pre></td></tr></table></figure>
+<p>cubismAllocator是内存分配器会被应用，所以作为全局变量，防止被销毁。然后是模型数据的加载</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std::string modelPath = <span class="string">&quot;res/Rice/&quot;</span>;</span><br><span class="line">    std::string modelJsonName = <span class="string">&quot;Rice.model3.json&quot;</span>;</span><br><span class="line">    model = <span class="keyword">new</span> <span class="built_in">LAppModel</span>();</span><br><span class="line">    model-&gt;<span class="built_in">init</span>(modelPath.<span class="built_in">c_str</span>(), modelJsonName.<span class="built_in">c_str</span>());</span><br></pre></td></tr></table></figure>
+<p>我们选用可爱的Rice酱来演示，这里的LAppModel与实例一样，继承自CubismUserModel，但拥用更简单的内容。之所以这样做主要是因为CubismUserModel里面许多重要的绘制函数都是protected的，所以只能用子类来实现调用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">model-&gt;<span class="built_in">update</span>();</span><br><span class="line"></span><br><span class="line">CubismMatrix44 projection;</span><br><span class="line"><span class="keyword">if</span> (model-&gt;<span class="built_in">GetModel</span>()-&gt;<span class="built_in">GetCanvasWidth</span>() &gt; <span class="number">1.0f</span> &amp;&amp; screen_width &lt; screen_height)</span><br><span class="line">&#123;</span><br><span class="line">    model-&gt;<span class="built_in">GetModelMatrix</span>()-&gt;<span class="built_in">SetWidth</span>(<span class="number">2.0f</span>);</span><br><span class="line">    projection.<span class="built_in">Scale</span>(<span class="number">1.0f</span>, <span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_width) / <span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_height));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    projection.<span class="built_in">Scale</span>(<span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_height) / <span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_width), <span class="number">1.0f</span>);</span><br><span class="line">&#125;</span><br><span class="line">model-&gt;GetRenderer&lt;Rendering::CubismRenderer_OpenGLES2&gt;()-&gt;<span class="built_in">SetMvpMatrix</span>(&amp;projection);</span><br><span class="line">model-&gt;GetRenderer&lt;Rendering::CubismRenderer_OpenGLES2&gt;()-&gt;<span class="built_in">DrawModel</span>();</span><br></pre></td></tr></table></figure>
+<p>然后是更新部分也比较简单，先模型数据update一下，然后再调用model的renderer进行绘制，我们在update里实现的比较简单，就是进行motion的轮流播放，但这样还没结束</p>
+
+<img align="center" src="./p30.png" />
+
+<p>从配置中，我们可以看到，在4个motion里，只有1个是我们调用的Idle类型，所有我们进行如下修改</p>
+
+<img align="center" src="./p31.png" />
+
+<p>至此基本可以算完成了，我们运行一下</p>
+
+<iframe align="center" src="./g4.gif"></iframe>
+
+<p>可以看到，我们的Rice酱已经正常的运动起来了。最后附上整个文件的源码</p>
+<figure class="highlight cpp"><figcaption><span>main.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line">﻿<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;glad/glad.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;GLFW/glfw3.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;LAppDefine.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;LAppPal.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;LAppTextureManager.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;LAppAllocator.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;CubismModelSettingJson.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Model/CubismModel.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Model/CubismUserModel.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Utils/CubismString.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Motion/CubismMotion.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Id/CubismIdManager.hpp&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> screen_width = <span class="number">1280</span>;</span><br><span class="line"><span class="keyword">int</span> screen_height = <span class="number">720</span>;</span><br><span class="line">GLFWwindow* window;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Csm;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Live2D::Cubism::Framework;</span><br><span class="line">LAppAllocator cubismAllocator;</span><br><span class="line">LAppTextureManager* textureManager;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LAppModel</span> :</span> <span class="keyword">public</span> Csm::CubismUserModel</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">LAppModel</span>() : <span class="built_in">CubismUserModel</span>() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">const</span> csmChar* dir, <span class="keyword">const</span> csmChar* fileName)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Load Data</span></span><br><span class="line">        csmSizeInt size;</span><br><span class="line">        csmString path = <span class="built_in">csmString</span>(dir) + fileName;</span><br><span class="line">        csmByte* buffer = LAppPal::<span class="built_in">LoadFileAsBytes</span>(path.<span class="built_in">GetRawString</span>(), &amp;size);</span><br><span class="line">        ICubismModelSetting* setting = <span class="keyword">new</span> <span class="built_in">CubismModelSettingJson</span>(buffer, size);</span><br><span class="line">        modelSetting = setting;</span><br><span class="line">        LAppPal::<span class="built_in">ReleaseBytes</span>(buffer);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Load Model</span></span><br><span class="line">        modelHomeDir = dir;</span><br><span class="line">        <span class="built_in">Load</span>(setting);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> csmFloat32 deltaTimeSeconds = LAppPal::<span class="built_in">GetDeltaTime</span>();</span><br><span class="line"></span><br><span class="line">        csmBool motionUpdated = <span class="literal">false</span>;</span><br><span class="line">        _model-&gt;<span class="built_in">LoadParameters</span>();</span><br><span class="line">        <span class="keyword">if</span> (_motionManager-&gt;<span class="built_in">IsFinished</span>())</span><br><span class="line">        &#123;</span><br><span class="line">            index = (index + <span class="number">1</span>) % modelSetting-&gt;<span class="built_in">GetMotionCount</span>(LAppDefine::MotionGroupIdle);</span><br><span class="line">            csmString name = Utils::CubismString::<span class="built_in">GetFormatedString</span>(<span class="string">&quot;%s_%d&quot;</span>, LAppDefine::MotionGroupIdle, index);</span><br><span class="line">            CubismMotion* motion = <span class="keyword">static_cast</span>&lt;CubismMotion*&gt;(motions[name.<span class="built_in">GetRawString</span>()]);</span><br><span class="line">            csmBool autoDelete = <span class="literal">false</span>;</span><br><span class="line">            _motionManager-&gt;<span class="built_in">StartMotionPriority</span>(motion, autoDelete, LAppDefine::PriorityIdle);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            motionUpdated = _motionManager-&gt;<span class="built_in">UpdateMotion</span>(_model, deltaTimeSeconds);</span><br><span class="line">        &#125;</span><br><span class="line">        _model-&gt;<span class="built_in">SaveParameters</span>();</span><br><span class="line">        _model-&gt;<span class="built_in">Update</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    csmInt32 index = <span class="number">-1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Load</span><span class="params">(ICubismModelSetting* setting)</span> </span>&#123;</span><br><span class="line">        csmByte* buffer;</span><br><span class="line">        csmSizeInt size;</span><br><span class="line">        csmString path = setting-&gt;<span class="built_in">GetModelFileName</span>();</span><br><span class="line">        path = modelHomeDir + path;</span><br><span class="line">        buffer = LAppPal::<span class="built_in">LoadFileAsBytes</span>(path.<span class="built_in">GetRawString</span>(), &amp;size);</span><br><span class="line">        <span class="built_in">LoadModel</span>(buffer, size);</span><br><span class="line">        LAppPal::<span class="built_in">ReleaseBytes</span>(buffer);</span><br><span class="line"></span><br><span class="line">        csmMap&lt;csmString, csmFloat32&gt; layout;</span><br><span class="line">        setting-&gt;<span class="built_in">GetLayoutMap</span>(layout);</span><br><span class="line">        _modelMatrix-&gt;<span class="built_in">SetupFromLayout</span>(layout);</span><br><span class="line">        _model-&gt;<span class="built_in">SaveParameters</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Load Motion</span></span><br><span class="line">        <span class="keyword">for</span> (csmInt32 i = <span class="number">0</span>; i &lt; setting-&gt;<span class="built_in">GetMotionGroupCount</span>(); i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">const</span> csmChar* group = setting-&gt;<span class="built_in">GetMotionGroupName</span>(i);</span><br><span class="line">            <span class="keyword">const</span> csmInt32 count = setting-&gt;<span class="built_in">GetMotionCount</span>(group);</span><br><span class="line">            <span class="keyword">for</span> (csmInt32 i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                csmString name = Utils::CubismString::<span class="built_in">GetFormatedString</span>(<span class="string">&quot;%s_%d&quot;</span>, group, i);</span><br><span class="line">                csmString path = setting-&gt;<span class="built_in">GetMotionFileName</span>(group, i);</span><br><span class="line">                path = modelHomeDir + path;</span><br><span class="line"></span><br><span class="line">                LAppPal::<span class="built_in">PrintLog</span>(<span class="string">&quot;[APP]load motion: %s =&gt; [%s_%d] &quot;</span>, path.<span class="built_in">GetRawString</span>(), group, i);</span><br><span class="line"></span><br><span class="line">                csmByte* buffer;</span><br><span class="line">                csmSizeInt size;</span><br><span class="line">                buffer = LAppPal::<span class="built_in">LoadFileAsBytes</span>(path.<span class="built_in">GetRawString</span>(), &amp;size);</span><br><span class="line">                CubismMotion* tmpMotion = <span class="keyword">static_cast</span>&lt;CubismMotion*&gt;(<span class="built_in">LoadMotion</span>(buffer, size, name.<span class="built_in">GetRawString</span>()));</span><br><span class="line"></span><br><span class="line">                csmFloat32 fadeTime = setting-&gt;<span class="built_in">GetMotionFadeInTimeValue</span>(group, i);</span><br><span class="line">                <span class="keyword">if</span> (fadeTime &gt;= <span class="number">0.0f</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    tmpMotion-&gt;<span class="built_in">SetFadeInTime</span>(fadeTime);</span><br><span class="line">                &#125;</span><br><span class="line">                fadeTime = setting-&gt;<span class="built_in">GetMotionFadeOutTimeValue</span>(group, i);</span><br><span class="line">                <span class="keyword">if</span> (fadeTime &gt;= <span class="number">0.0f</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    tmpMotion-&gt;<span class="built_in">SetFadeOutTime</span>(fadeTime);</span><br><span class="line">                &#125;</span><br><span class="line">                motions[name] = tmpMotion;</span><br><span class="line">                LAppPal::<span class="built_in">ReleaseBytes</span>(buffer);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Load Texture</span></span><br><span class="line">        <span class="built_in">CreateRenderer</span>();</span><br><span class="line">        textureManager = <span class="keyword">new</span> <span class="built_in">LAppTextureManager</span>();</span><br><span class="line">        <span class="keyword">for</span> (csmInt32 modelTextureNumber = <span class="number">0</span>; modelTextureNumber &lt; setting-&gt;<span class="built_in">GetTextureCount</span>(); modelTextureNumber++)</span><br><span class="line">        &#123;</span><br><span class="line">            csmString texturePath = setting-&gt;<span class="built_in">GetTextureFileName</span>(modelTextureNumber);</span><br><span class="line">            texturePath = modelHomeDir + texturePath;</span><br><span class="line"></span><br><span class="line">            LAppTextureManager::TextureInfo* texture = textureManager-&gt;<span class="built_in">CreateTextureFromPngFile</span>(texturePath.<span class="built_in">GetRawString</span>());</span><br><span class="line">            <span class="keyword">const</span> csmInt32 glTextueNumber = texture-&gt;id;</span><br><span class="line"></span><br><span class="line">            GetRenderer&lt;Rendering::CubismRenderer_OpenGLES2&gt;()-&gt;<span class="built_in">BindTexture</span>(modelTextureNumber, glTextueNumber);</span><br><span class="line">        &#125;</span><br><span class="line">        GetRenderer&lt;Rendering::CubismRenderer_OpenGLES2&gt;()-&gt;<span class="built_in">IsPremultipliedAlpha</span>(<span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    Csm::csmString modelHomeDir;</span><br><span class="line">    Csm::ICubismModelSetting* modelSetting;</span><br><span class="line">    Csm::csmMap&lt;Csm::csmString, Csm::ACubismMotion*&gt; motions;</span><br><span class="line">&#125;;</span><br><span class="line">LAppModel* model;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initCubism</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//Framework Init</span></span><br><span class="line">    CubismFramework::Option cubismOption;</span><br><span class="line">    cubismOption.LogFunction = LAppPal::PrintMessage;</span><br><span class="line">    cubismOption.LoggingLevel = LAppDefine::CubismLoggingLevel;</span><br><span class="line">    CubismFramework::<span class="built_in">StartUp</span>(&amp;cubismAllocator, &amp;cubismOption);</span><br><span class="line">    CubismFramework::<span class="built_in">Initialize</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Model Init</span></span><br><span class="line">    std::string modelPath = <span class="string">&quot;res/Rice/&quot;</span>;</span><br><span class="line">    std::string modelJsonName = <span class="string">&quot;Rice.model3.json&quot;</span>;</span><br><span class="line">    model = <span class="keyword">new</span> <span class="built_in">LAppModel</span>();</span><br><span class="line">    model-&gt;<span class="built_in">init</span>(modelPath.<span class="built_in">c_str</span>(), modelJsonName.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">    LAppPal::<span class="built_in">UpdateTime</span>();</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//const csmFloat32 userTimeSeconds;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">updateCubism</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//update</span></span><br><span class="line">    model-&gt;<span class="built_in">update</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//draw</span></span><br><span class="line">    CubismMatrix44 projection;</span><br><span class="line">    <span class="keyword">if</span> (model-&gt;<span class="built_in">GetModel</span>()-&gt;<span class="built_in">GetCanvasWidth</span>() &gt; <span class="number">1.0f</span> &amp;&amp; screen_width &lt; screen_height)</span><br><span class="line">    &#123;</span><br><span class="line">        model-&gt;<span class="built_in">GetModelMatrix</span>()-&gt;<span class="built_in">SetWidth</span>(<span class="number">2.0f</span>);</span><br><span class="line">        projection.<span class="built_in">Scale</span>(<span class="number">1.0f</span>, <span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_width) / <span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_height));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        projection.<span class="built_in">Scale</span>(<span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_height) / <span class="keyword">static_cast</span>&lt;<span class="keyword">float</span>&gt;(screen_width), <span class="number">1.0f</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    model-&gt;GetRenderer&lt;Rendering::CubismRenderer_OpenGLES2&gt;()-&gt;<span class="built_in">SetMvpMatrix</span>(&amp;projection);</span><br><span class="line">    model-&gt;GetRenderer&lt;Rendering::CubismRenderer_OpenGLES2&gt;()-&gt;<span class="built_in">DrawModel</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">glfwInit</span>();</span><br><span class="line">    window = <span class="built_in">glfwCreateWindow</span>(screen_width, screen_height, <span class="string">&quot;Live2D&quot;</span>, <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">    <span class="built_in">glfwMakeContextCurrent</span>(window); <span class="built_in">gladLoadGLLoader</span>((GLADloadproc)glfwGetProcAddress);</span><br><span class="line">    <span class="built_in">glfwSwapInterval</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">glViewport</span>(<span class="number">0</span>, <span class="number">0</span>, screen_width, screen_height);</span><br><span class="line">    <span class="built_in">glEnable</span>(GL_BLEND);</span><br><span class="line">    <span class="built_in">glBlendFunc</span>(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">initCubism</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">glfwWindowShouldClose</span>(window)) &#123;</span><br><span class="line">        LAppPal::<span class="built_in">UpdateTime</span>();</span><br><span class="line">        <span class="built_in">glClearColor</span>(<span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">0.0f</span>, <span class="number">1.0f</span>);</span><br><span class="line">        <span class="built_in">glClear</span>(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);</span><br><span class="line">        <span class="built_in">glClearDepth</span>(<span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">updateCubism</span>();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">glfwSwapBuffers</span>(window);</span><br><span class="line">        <span class="built_in">glfwPollEvents</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">glfwTerminate</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="其它SDK"><a href="#其它SDK" class="headerlink" title="其它SDK"></a>其它SDK</h1><p>除了我们的原生环境，Live2DCubism还提供了Web环境和Unity环境。我们已经度过了原生环境这个最艰难的部分，其它的其实也就变简单了很多，我们稍微看看其它的SDK吧。</p>
+<h2 id="UnitySDK"><a href="#UnitySDK" class="headerlink" title="UnitySDK"></a>UnitySDK</h2><p>Unity是如果一个十分常用的游戏开发引擎，同时还基于mono集成了一强大的编辑器，与UE4想比，比较适合多端小型游戏开发，上手也比较简单，SDK则是直接包装为unitypackage，这样的话用起来也不会太过困难。先随便的创建一个空项目，找到我们的资源包</p>
+
+<img align="center" src="./p32.png" />
+
+<p>因为在Unity里面，脚本文件cs也属于资源，cs即c#，本来是window上的一门基于net的开发语言，但由于后来mono计划，使它为了一门和java类似的跨平台开发语言，拥有和C差不多的潜力</p>
+
+<img align="center" src="./p33.png" />
+
+<p>从资源内容来看，Cubism在这里下的功夫，比原生环境多太多了，除了用c#写的core和framework以外，还提供了各种适配Unity工具。但这其实是合情合理的，Live2D大部分的应用场景基本都在于游戏开发，这也可以解释为什么在原生开发的SDK中，还有一个cocos2d引擎版的在里面。</p>
+<h2 id="WebSDK"><a href="#WebSDK" class="headerlink" title="WebSDK"></a>WebSDK</h2><p>Web的项目是基于node.js环境，使用的开发语言是js的超集typescript(ts)，官方推荐使用的构建工具是Webpack，编辑器是visualcode，连对应的配置文件都准备好了</p>
+
+<img align="center" src="./p34.png" />
+
+<p>原生环境看了都眼馋，就我们什么都没有。我们先运行install的task，主要完成基础依赖的安装</p>
+
+<img align="center" src="./p35.png" />
+
+<p>接下来执行build的任务，我们使用的都是typescript，这里完成静态页面的生成</p>
+
+<img align="center" src="./p36.png" />
+
+<p>最后实际就是生成了一个类似于程序的js文件</p>
+
+<img align="center" src="./p37.png" />
+
+<p>比较不幸的是，我并不能成功运行</p>
+
+<img align="center" src="./p38.png" />
+
+<p>这里是因为浏览器的跨域访问政策，导致无法取到模型资源，不过这也有办法解决，比如，我使用HBuilderX开发工具自带的，用于调试的浏览器</p>
+
+<img align="center" src="./p39.png" />
+
+<h2 id="Live2D插件"><a href="#Live2D插件" class="headerlink" title="Live2D插件"></a>Live2D插件</h2><p>最后再介绍一个网页开发常用Live2D插件，是国人基于WebSDK开发成的，<a target="_blank" rel="noopener" href="https://github.com/stevenjoezhang/live2d-widget">live2d-widget</a>，它的前身是hexo-helper-live2d和live2d-widget.js，最开始主要用于私人博客，旧项目不再维护，新项目可以应用于各种Web开发场景。<br>至于使用更是便捷到了极致，引入一个js文件，再对参数进行调节即可，案例很多，网上一大堆，就不多赘述了。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0/">编程手记</a><a class="post-meta__tags" href="/tags/%E6%B8%B2%E6%9F%93/">渲染</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">逯晓零</div><div class="author-info__description">我喜欢简洁，仅此而已。</div></div><div class="card-info-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">文件形式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NativeSDK"><span class="toc-number">2.</span> <span class="toc-text">NativeSDK</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB"><span class="toc-number">2.1.</span> <span class="toc-text">源码阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.1.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E5%BE%AA%E7%8E%AF"><span class="toc-number">2.1.2.</span> <span class="toc-text">渲染循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%A2%B3%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">流程梳理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%A1%88%E4%BE%8B"><span class="toc-number">2.3.</span> <span class="toc-text">实现案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5"><span class="toc-number">2.3.1.</span> <span class="toc-text">准备阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.2.</span> <span class="toc-text">代码实现</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E5%AE%83SDK"><span class="toc-number">3.</span> <span class="toc-text">其它SDK</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UnitySDK"><span class="toc-number">3.1.</span> <span class="toc-text">UnitySDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebSDK"><span class="toc-number">3.2.</span> <span class="toc-text">WebSDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Live2D%E6%8F%92%E4%BB%B6"><span class="toc-number">3.3.</span> <span class="toc-text">Live2D插件</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-10-01-%E6%9D%82%E8%B0%88%EF%BC%9A2023-10-01/" title="杂谈：2023.10.01">杂谈：2023.10.01</a><time datetime="2023-10-01T09:15:46.000Z" title="发表于 2023-10-01 17:15:46">2023-10-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-09-03-%E6%88%91%E8%BF%98%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/" title="我还想做的事">我还想做的事</a><time datetime="2023-09-02T23:41:56.000Z" title="发表于 2023-09-03 07:41:56">2023-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-07-27-%E9%AD%94%E7%BE%A4%E6%9C%88%E5%85%89/" title="魔群月光">魔群月光</a><time datetime="2023-07-27T07:34:21.000Z" title="发表于 2023-07-27 15:34:21">2023-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 逯晓零</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>

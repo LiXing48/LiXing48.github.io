@@ -1,0 +1,191 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>代理技术简介 | 虚空之地</title><meta name="keywords" content="代理,VPN"><meta name="author" content="逯晓零"><meta name="copyright" content="逯晓零"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="今天来水一篇文章，简单介绍一下代理的基础知识吧。 需求所谓代理，其实就是代理执行，在网络通信里指的是使用目标ip来进行流量的代发，我们可以在本地配置代理，也可以对浏览器进行特别的代理，这些大多用处不大。我们代理的目的一般有流量拦截和加密通信。流量拦截可以检测本地发出去的包和过滤网络输入的包，这就是俗称的抓包，抓包是基于本地代理实现的，但是需要管理员权限，可以侵犯其它进程的网络数据怎么想都是要权限的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代理技术简介">
+<meta property="og:url" content="http://example.com/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="今天来水一篇文章，简单介绍一下代理的基础知识吧。 需求所谓代理，其实就是代理执行，在网络通信里指的是使用目标ip来进行流量的代发，我们可以在本地配置代理，也可以对浏览器进行特别的代理，这些大多用处不大。我们代理的目的一般有流量拦截和加密通信。流量拦截可以检测本地发出去的包和过滤网络输入的包，这就是俗称的抓包，抓包是基于本地代理实现的，但是需要管理员权限，可以侵犯其它进程的网络数据怎么想都是要权限的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2021-12-29T08:12:45.000Z">
+<meta property="article:modified_time" content="2022-10-14T23:47:06.846Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="代理">
+<meta property="article:tag" content="VPN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '代理技术简介',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-15 07:47:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">虚空之地</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">代理技术简介</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-29T08:12:45.000Z" title="发表于 2021-12-29 16:12:45">2021-12-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-14T23:47:06.846Z" title="更新于 2022-10-15 07:47:06">2022-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>今天来水一篇文章，简单介绍一下代理的基础知识吧。</p>
+<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>所谓代理，其实就是代理执行，在网络通信里指的是使用目标ip来进行流量的代发，我们可以在本地配置代理，也可以对浏览器进行特别的代理，这些大多用处不大。我们代理的目的一般有流量拦截和加密通信。流量拦截可以检测本地发出去的包和过滤网络输入的包，这就是俗称的抓包，抓包是基于本地代理实现的，但是需要管理员权限，可以侵犯其它进程的网络数据怎么想都是要权限的吧，对于桌面系统获得权限就完事了，但我们的手机就有点麻烦了，所以接下来我们会以安卓手机为例。不过先说说加密通信吧，我们平时访问网页的时候，所有的信息都会是明文(http)，很容易被某墙丢包，就算使用(https)也要传入域名信息，也容易被某墙丢包，所以我们与我们的代理外服通信的时候如果不进行加密的话，是越不过某墙的，因此本地代理还有一个用处就是抓取流量以后进行包装加密，防止被中间人攻击者发现而进行恶意篡改，这样我们就能成功与代理外服通信了。其实关于代理，我们只是讲本地代理的东西，服务器代理嘛，成本高就不说了，而且思想也差不多，而且我们以安卓为主。</p>
+<h1 id="学习项目"><a href="#学习项目" class="headerlink" title="学习项目"></a>学习项目</h1><p>安卓实现主动代理的基本手段是使用系统提供的vpn服务，安卓的防火墙软件，加速器软件，抓包软件等都是基于此来实现的，其基本用处是拦截所有发送至互联网的数据，其核心类为android.net.VpnService。我们从github上，发现一个简单的项目LocalVpn，它没什么特别的功能就是基于vpn服务实现了一个转发器，我们接下来就以此来深入了解一下VpnService的用法吧。</p>
+<h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><p>使用此服务的基础权限是<code>android.permission.INTERNET</code>，即与网络相关的权限。然后此项目，有一个主界面和一个基本服务</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p1.png" class="">
+<p>主界面运行效果如下</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p2.png" class="">
+<p>就一个按钮，点一下即可启用我们的服务，显然像这种不断运行拦截流量的要通过Service来实现。</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p3.png" class="">
+<p>这里注册了一个广播，它与此主界面绑定，用于Service与主界面的通信，如果Service的状态改变，就会传信息到主界面通知它改变按钮的状态。</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p4.png" class="">
+<p>由上述官方文档可知，首先我们要调用静态方法<code>VpnService.prepare(this)</code>来确定是否有权限启动VPN，有的话就会返回请求启动VPN的intent，这个intent主要给用户来确定是否启动vpn。然后在<code>onActivityResult</code>里面确定返回结果，一切正常的话则启动我们的LocalVPNService服务。LocalVPNService继承于VpnService，用于实现流量拦截的核心类，他们都是Service的子类，可以一直运行在后台。然后就是通过VpnService.Builder来构建vpn接口的文件描述符，读此描述符读写来完成流量转发。我们能否直接使用VpnService而不继承呢？重实现的功能角度和适配上有些不太现实。我们来通览一下这个项目的基本结构吧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ByteBufferPool.java  LocalVPNService.java  TCPInput.java   UDPOutput.java</span><br><span class="line">LRUCache.java        Packet.java           TCPOutput.java</span><br><span class="line">LocalVPN.java        TCB.java              UDPInput.java</span><br></pre></td></tr></table></figure>
+<p>UDP<em>，和TCP</em>是分别用来分析两种常见协议TCP/UDP的类，Packet是发送包的Java抽象，ByteBufferPool就是一段反复利用的内存而已，LocalVPNService是主要服务，LocalVPN是主界面，TCB主要用于完成TCP握手，LRUCache只是一个类似k-v的数据结构。由这些我们多少可以知道，vpn是运行在ip协议上的，官方文档确实有这么一句话<code>The interface is running on Internet Protocol (IP), so packets are always started with IP headers.</code>。所以使用的时候还是得小心点，不止UDP/TCP，很多协议都运行在ip协议之上，不过嘛，我们抓包就只要这两个协议就差不多够了，其它的可以直接放行，比如常用的socket就是基于UDP协议的。</p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><p>我们先来看一下最开始的创建函数</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p5.png" class="">
+<p>首先使isRunning为true表示运行，然后在setupVPN初始化我们的vpnservice，至于那些参数基本都是拿来判断是否通过vpn的，比如</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p6.png" class="">
+<p>这个就是表示可以通过vpn路由的地址族，至于像setSession这类设置名字的就没什么好说的了。哦，还有一个setConfigureIntent可以讲一讲，它可以得到一个PendingIntent对象，这个主要是系统配置传入的intent，如下</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p7.png" class="">
+<p>注意到每个软件的最右边有一个设置一样的按钮，点击它就可以触发PendingIntent，不用的话就是系统自带的了，本案例里没有用到，我们就这样一笔带过吧。接下来对数据的处理值得我们好好研究一下。<br>在<code>executorService = Executors.newFixedThreadPool(5);</code>里，我们创建了一个容量为5的线程池，5个线程分别处理不同事务，其中VPNRunnable是与vpn直接对接的线程，UDPInput和UDPOutput处理UDP相关事务，TCPInput和TCPOutput处理TCP相关事务，这里我们可能会疑惑为什么UDP和TCP需要特别拿来处理，其实我猜大概是用来分担线程压力的，另一方面的话，这部分也是我们想重点偷窥拦截的对象，所以单独来处理也不为过。对于tcp和udp，我们发现它使用了Selector和ConcurrentLinkedQueue，具体我们不关心，我们可以容易知道这是实现nio(无阻塞io)的一种基本方法，为什么会需要这个？其实也与我们的目的相关，比如tcp是有握手过程的，对于每个tcp连接，我们可以通过nio来回避多线程阻塞的麻烦。至于nio嘛，简单讲其实就是一个线程对一个事务队列进行循环执行，自己去补吧。最后注册了一个我们之前提到的广播，至于一些清理操作，没啥好说的。我们去看看主线程吧</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p8.png" class="">
+<p>首先依据文件描述符创建相应的文件输入输出流，这里是linux万物皆文件的思想，对于网络接口我们也视为一个文件，发送数据即写入，接受数据即读取。虽说它转化为了FileChannel对象，但并没有用到特有的传输方法transferTo和transferFrom，所有与原始的输入输出流差别不大，只不过数据的载体是byteBuffer罢了。然后循环保活线程，如果曾发出过数据，那么从ByteBufferPool取出ByteBuffer数据，否则清空数据，至于数据哪来的，当然是其它线程给的，我们后面会看的。然后是read，根据文档<code>Each read from the descriptor retrieves an outgoing packet which was routed to the interface.</code>意思就是拦截其它程序发出去的包，并保存到bufferToNetwork，接下来构造Packet对象来封装我们的包，至于Packet的实现属于计算机网络系统的基础内容了，总之就是解析IP协议啦。接下来就是依据TCP和UDP协议分别将数据送入相应队列，至于其它类型没有任何处理，不过ip协议上真的就这两部分吗？确实有其它的协议，如ICMP和IGMP协议，我最喜欢下面这张模型图了</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p9.png" class="">
+<p>这样容易看出，除了TCP和UDP外的其它依赖IP协议的基本都处理不到，所以不管其实也无所谓了。接下来从networkToDeviceQueue队列了取得接收回来的数据，然后write，同样我们来看官方文档<code>Each write to the descriptor injects an incoming packet just like it was received from the interface.</code>，这里就是将接受的数据回传给应用。最后稍微让线程休息一下，防止耗电过度，至此我们的主线程结束了。到这里我们可能会发现了一个比较神奇的问题，我们拦截的都是IP协议上的包，但我们的程序好像只能发送TCP和UDP的包，比如通过Socket发送TCP的包，有没有觉得头脑炸裂，竟然不能简单的read和write来实现转发，还必须自己解析包来模拟实现。</p>
+<h1 id="TCP转发"><a href="#TCP转发" class="headerlink" title="TCP转发"></a>TCP转发</h1><p>我们先从较为复杂的TCP协议看起吧，一样先直接看主线程吧，你问为什么不看看其它的函数，如构造方法？这不都是想要什么传什么嘛，也没什么好说的</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p10.png" class="">
+<p>这里有两个队列inputQueue和outputQueue，对于TCPOutput来说，inputQueue就是设备发向网络的数据队列，在之前的那个线程里的<code>deviceToNetworkTCPQueue.offer(packet);</code>里面传入了数据，我们在这里取出来，一旦成功取出将进入下一阶段。Packet里的backingBuffer即是除了报头以外的数据，也就是传输的核心内容，后面则是取出一些报头的基本内容如目标ip和端口之类的。TCB是tcp连接的正体封装，主要是用来区别下面的一些握手过程，它们会分别调用process*来处理，RST是通信终结标志，所以调用的是closeCleanly。这里我们需要注意，握手是相对与ip协议那一端，而我们在发出数据这一方是不需要握手的，我们可以直接使用Socket来实现数据传输。我们继续看吧</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p11.png" class="">
+<p>我们看到<code>vpnService.protect(outputChannel.socket());</code>方法，这主要为了保证我们程序向外发送的数据不会被vpn拦截，不然会发生无限循环，这挺好理解的吧。<code>outputChannel.connect(new InetSocketAddress(destinationAddress, destinationPort));</code>我们与数据发送的最后目标连接，<code>tcb.selectionKey = outputChannel.register(selector, SelectionKey.OP_CONNECT, tcb);</code>往我们的selector里面注册事件，我们注意到<code>currentPacket.updateTCPBuffer(responseBuffer,)</code>之类的方法，其实主要是为了让其它应用接受包里面的ip和端口之类的看起来确实是自己发出数据的回应，最后<code>outputQueue.offer(responseBuffer);</code>将我们收到的修改包传入接受队列outputQueue。那么啥时候发数据呢？实际在标志位为ACK的时候表示我们正在相互传输数据，我们来看processACK，我们再次说明一下，这里的ACK是相对于发出包的其它应用，而与远程目标的连接并没有这个概念</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p12.png" class="">
+<p>从下面这段代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">      while (payloadBuffer.hasRemaining())</span><br><span class="line">          outputChannel.write(payloadBuffer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以知道，应用只把payloadBuffer的数据发送到远端，即我们之前的backingBuffer，也就是说不包含报头信息，就像我们之前说的那样。数据接收的话在TCPInput里，我们去看看吧</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p13.png" class="">
+<p>你和我说看不懂这些操作，去复习nio的基本内容吧，nio的基本操作是遍历select，寻找我们需要的操作来处理，而操作的依据是我们获取的SelectionKey，这里主要处理连接和读取，我们去看一下如何读取的</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p14.png" class="">
+<p>我们看到语句<code>readBytes = inputChannel.read(receiveBuffer);</code>，它将接收的数据存入receiveBuffer，结果的话最终放入outputQueue队列。我们发现两个TCP都有将数据包放入output队列，似乎有点反直觉，但其实，往其它应用传入数据就如我们之前所说还包含握手过程，TCPOutput传入握手包，TCPInput则传入实际的数据包。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这样好像结束了？UDP的话其实更加简单粗暴，直接扔包和接包就行了，连对接都不需要。然后好像就没内容了，可是怎么觉得什么都没有讲的感觉，所以嘛，我才会在开头说这是水文章。其实这个应用的大部分实现都在于协议包的解析，如从IP包中解析出TCP包和UDP包，然后是通过nio来与目标完成通信的过程，TCP使用Socket，UDP使用Datagram，也就是说大部分内容都是对协议的理解，感觉枯燥又无聊。哎呀，不说了，我们直接画个总结图结束我们的文章吧</p>
+<img src="/archives/2021-12-29-%E4%BB%A3%E7%90%86%E6%8A%80%E6%9C%AF%E7%AE%80%E4%BB%8B/p15.png" class="">
+<p>这应该是今年最后的一篇文章了，以这样的形式结束，感觉也不错。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%90%86/">代理</a><a class="post-meta__tags" href="/tags/VPN/">VPN</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">逯晓零</div><div class="author-info__description">我喜欢简洁，仅此而已。</div></div><div class="card-info-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">学习项目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">多线程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TCP%E8%BD%AC%E5%8F%91"><span class="toc-number">5.</span> <span class="toc-text">TCP转发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-10-01-%E6%9D%82%E8%B0%88%EF%BC%9A2023-10-01/" title="杂谈：2023.10.01">杂谈：2023.10.01</a><time datetime="2023-10-01T09:15:46.000Z" title="发表于 2023-10-01 17:15:46">2023-10-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-09-03-%E6%88%91%E8%BF%98%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/" title="我还想做的事">我还想做的事</a><time datetime="2023-09-02T23:41:56.000Z" title="发表于 2023-09-03 07:41:56">2023-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-07-27-%E9%AD%94%E7%BE%A4%E6%9C%88%E5%85%89/" title="魔群月光">魔群月光</a><time datetime="2023-07-27T07:34:21.000Z" title="发表于 2023-07-27 15:34:21">2023-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 逯晓零</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>认识Unity引擎 | 虚空之地</title><meta name="keywords" content="引擎,游戏"><meta name="author" content="逯晓零"><meta name="copyright" content="逯晓零"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="对于个人而言，在游戏开发的过程中，最缺的可能就是游戏素材了，素材的获取途径是多样的，但往往我们都是在某个游戏之中发现某个想要的素材，所以游戏解包成了我们需要的技能之一，如今大部分手游的开发引擎都是Unity(对apk拆包就可以在lib下发现libunity.so)。“知己知彼，百战不殆”，所以在拆包前，我们需要从整体上认识Unity的架构，虽然Unity对免费用户并不开源，但许多类似的思想是不会改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="认识Unity引擎">
+<meta property="og:url" content="http://example.com/archives/2022-04-20-%E8%AE%A4%E8%AF%86Unity%E5%BC%95%E6%93%8E/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="对于个人而言，在游戏开发的过程中，最缺的可能就是游戏素材了，素材的获取途径是多样的，但往往我们都是在某个游戏之中发现某个想要的素材，所以游戏解包成了我们需要的技能之一，如今大部分手游的开发引擎都是Unity(对apk拆包就可以在lib下发现libunity.so)。“知己知彼，百战不殆”，所以在拆包前，我们需要从整体上认识Unity的架构，虽然Unity对免费用户并不开源，但许多类似的思想是不会改">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2022-04-20T04:46:24.000Z">
+<meta property="article:modified_time" content="2022-10-14T23:47:09.528Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="引擎">
+<meta property="article:tag" content="游戏">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/archives/2022-04-20-%E8%AE%A4%E8%AF%86Unity%E5%BC%95%E6%93%8E/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '认识Unity引擎',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-15 07:47:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">虚空之地</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/words/"><i class="fa-fw fa fa-snowflake"></i><span> 动态</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 绘梦</span></a></div><div class="menus_item"><a class="site-page" href="/retrieval/"><i class="fa-fw fa fa-search"></i><span> 检索</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">认识Unity引擎</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-20T04:46:24.000Z" title="发表于 2022-04-20 12:46:24">2022-04-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-14T23:47:09.528Z" title="更新于 2022-10-15 07:47:09">2022-10-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>对于个人而言，在游戏开发的过程中，最缺的可能就是游戏素材了，素材的获取途径是多样的，但往往我们都是在某个游戏之中发现某个想要的素材，所以游戏解包成了我们需要的技能之一，如今大部分手游的开发引擎都是Unity(对apk拆包就可以在lib下发现libunity.so)。“知己知彼，百战不殆”，所以在拆包前，我们需要从整体上认识Unity的架构，虽然Unity对免费用户并不开源，但许多类似的思想是不会改变的，不会影响我们的理解。</p>
+<h1 id="从开发的视角看Unity"><a href="#从开发的视角看Unity" class="headerlink" title="从开发的视角看Unity"></a>从开发的视角看Unity</h1><p>UnityHub是一个没用的玩意，不用管它，我们重点来研究UnityEditor。Unity对我来说是一个闭源项目，所以要想研究Unity，只能从官方文档和工程目录开始研究。</p>
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><p>Unity的文档总共有两部分，<a target="_blank" rel="noopener" href="https://docs.unity.cn/cn/current/Manual/">用户手册</a>和<a target="_blank" rel="noopener" href="https://docs.unity.cn/cn/current/ScriptReference/">脚本API</a>，前者是基本属于整个UnityEditor软件的操作手册，后者则是脚本开发的API查询手册，虽然其并没有告诉我们Unity的架构，但我们可以以此作为依据了解个一二。一般的游戏引擎由软件库加头文件组成，比如我们的cocos2dx，这类引擎使用起来和一般的第三方库区别不大，但这种开发方式存在开发语言的依赖性，比如跨平台的库基本都是用C/C++写的。在我使用的Unity2020里面，只有唯一的脚本语言C#，又由于Unity的跨平台性，我们有理由猜测Unity是运行在mono上的，事实也确实如此。mono是一个开源的C#运行环境，通过对Unity程序的考察，大致可以猜出Unity的底层API基本都是C/C++写成，再通过mono(可以看成一个C/C++库)得到在C#的接口，这是Unity的核心部分。至于UnityEditor则是一种辅助进行可视化开发的工具，或者说这是Unity的核心竞争力之一，深入搞过Unity的应该都知道C#脚本拥有极大的控制权，甚至是UnityEditor的界面。</p>
+<h2 id="工程目录"><a href="#工程目录" class="headerlink" title="工程目录"></a>工程目录</h2>
+<img align="center" src="./p1.png" />
+
+<p>我们直接从软件内部来看工程，是因为重要的操作部分已经被显示了出来，实际的工程目录应该长这样</p>
+
+<img align="center" src="./p2.png" />
+
+<p>大部分是配置相关，在Editor内也可以完成操作，所以作用不大，值得关注的是里面的VisualStudio工程文件sln和csproj。它实际是Unity脚本编写的核心配置文件，虽然与编译相关，但并非用于编译，编译的核心工具链在UnityEditor安装目录下，更常见的情况是依据不同平台直接使用外部的SDK。Assembly-CSharp主要管理与我们游戏相关的脚本，Assembly-CSharp-Editor管理与我们编辑器相关的脚本，后者的报错是不会影响游戏的生成，因为它就相当于Unity的插件一样，顶多插件导入失败。Packages即外置包，相当于我们平时开发使用的第三方库，Unity是面向资源(一种比喻)的开发，包就相当于资源的打包，实际就是在Unity商店里下载的unitypackage，区别在于使用unitypackage导入会让它确实的在这里，而packages里则是一种引用，要在PackagesManager里进行管理</p>
+
+<img align="center" src="./p5.png" />
+
+<p>至于包的内容就是Assets目录下的内容，可以是各种Unity型的文件，不仅可以对游戏进行各种控制，还能控制整个编辑器</p>
+
+<img align="center" src="./p3.jpg" />
+
+<p>导入相应包后</p>
+
+<img align="center" src="./p4.png" />
+
+<p>显然unity的功能变多了。</p>
+<h2 id="Unity开发理念"><a href="#Unity开发理念" class="headerlink" title="Unity开发理念"></a>Unity开发理念</h2><p>这是我自己的理解，Unity应该属于面向资源的开发，资源是对所有Unity型与一般资源的总称，一般资源如图片的png等没什么好说的，我们主要来研究Unity型资源。<br><strong>.unity</strong>是场景(Scene)文件，实际就是记录整个页面信息的文件，可以用文本编辑器打开看到里面的内容，而UnityEditor就是以场景作为编辑器的一次打开单位，实时渲染当前的场景</p>
+
+<img align="center" src="./p6.png" />
+
+<p>与基本所有引擎一样，场景的组织实体的方式也是树，根节点是当前的场景，内部的实体都是GameObject，其中蓝色的代表Prefab，即一种可以反复利用的实体。对于每个GameObject可以通过右边的Inspector看到它的Component，一个实体由多个Component组成，最基本的Component是Transform，表示实体的位置、旋转和缩放。这是一种游戏资源的组织方式，正是不同的Component组成才表明了这个GameObject与其它的是不同的。在Unity中，添加GameObject有很多类型，但实际都是一样的，只是组织了不同的预设Component。想要了解游戏引擎的基础内容，我推荐<a target="_blank" rel="noopener" href="https://github.com/TheCherno/Hazel">这个</a>，搜索这个作者可以找到他一步步构建这个引擎的过程，使用的是OpenGL，十分适合想要了解底层原理的人。<br><strong>.cs</strong>是开发的脚本文件，整个引擎最重要的部分之一，没有脚本的程序是没有生命力的，有脚本进行逻辑控制，游戏才能称之为游戏，但脚本的生命周期应该才是我们最应该关心的东西</p>
+
+<img align="center" src="./p7.png" />
+
+<p>在进行编译的时候，基本单位是Scene，最右边表示Scene的标号，游戏启动的时候会最先加载编号为0的场景，场景切换需要使用脚本，可视化界面基本找不到完成的方案。脚本最基本的用法是，挂载到GameObject上</p>
+
+<img align="center" src="./p8.png" />
+
+<p>从中我们可以看到，脚本通过Script这个Component挂载到实体上，但脚本必须是MonoBehaviour的子类(不挂载，做为引用的话自然就无所谓了)，而这个类的正好就给出了整个脚本的生命周期，看看官方文档</p>
+
+<img align="center" src="./p9.png" />
+
+<p>比如OnStart是脚本第一次被唤醒是执行的方法，OnUpdate则是每帧执行一次的方法等</p>
+
+<img align="center" src="./p10.png" />
+
+<p>Unity脚本的库看似有4个，实际常使用的只要两个，UnityEngine和UnityEditor，前者是游戏开发使用的库，后者是对编辑器的改造，主要用于开发插件，Unity里的都是渲染相关的理念如Jobs等，它与Other基本就没怎么用过，根本就没空去了解它们。<br>除了以上两个，其它资源都没什么好说的，如.shader表示着色器，.anim表示动画等，讨论它们如同讨论图片的各种格式一样，都只是资源的在Unity里的表现形式，都可以嵌入GameObject中罢了。</p>
+<h1 id="从用户的视角看Unity"><a href="#从用户的视角看Unity" class="headerlink" title="从用户的视角看Unity"></a>从用户的视角看Unity</h1><p>Unity的编译配置挺复杂的，但经过多次实验，编译后文件的差距都不会太大，包括Unity2018平台(大多游戏都是这个版本)，区别较大的是mono脚本编译和il2cpp编译(我们后面讲，接下来都以mono为例)</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><p>在Windows平台下，我们可以得到以下这些文件(选中的)</p>
+
+<img align="center" src="./p11.png" />
+
+<p>exe是我们的主程序，UnityPlayer.dll则是我们引擎的主要运行库，MonoBleedingEdge包含了mono运行的dll和相关的配置，这些基本都是我们无法控制的固定文件，Unity是面向“资源”的开发，我们的目的是找到这些“资源”，进入“_Data”，我们有</p>
+
+<img align="center" src="./p12.png" />
+
+<p>Managed存储了一系列的dll动态库文件，但你会发现Android版的也会有这些，这里就不得不提一下mono了，你可能会说后缀名代表不了什么，但对两种dll进行16进制分析</p>
+
+<img align="center" src="./p13.png" />
+
+<p>可以看到文件头是基本一致的，这足以说明它们是同一类的二进制文件。玩过linux的可能知道，mono在linux上可以作为window运行工具，不过是有限制的，只有在.net平台下开发的程序才有效，所以更多的时候用的都是wine。mono实际上就是一个模拟.net框架的东西，将它称为C#的开发工具并不合适，mono编译的结果与.net是一样的，mono真正的意义是模拟.net，使得.net可以存在于多个平台上。我们所见的这些在Managed中以UnityEngine开头的dll就是Unity的C#接口所对应的动态库，所以对于不需要的库，随手删掉也不会影响程序的运行，不过内存也不大，删不删也无所谓了  </p>
+
+<img align="center" src="./p14.png" />
+
+<p>Resources并不是asset，存储的都是Unity系统自带的资源，属于不可控的部分，在Data下真正与我们开发Assets相关的，可以控制的其实只有globalgamemanagers和level，前者是资源打包，后者是我们的场景</p>
+
+<img align="center" src="./p15.png" />
+
+<p>我们打开Level0即场景SampleScene，发现它们的结构是一模一样的，排除系统的资源，我们还能找到我们的脚本文件</p>
+
+<img align="center" src="./p16.png" />
+
+<p>从整体上来看，真正需要解包的东西看样子并不多嘛？</p>
+<h2 id="android"><a href="#android" class="headerlink" title="android"></a>android</h2><p>以笔者现有的物质基础，只能再看一个安卓了</p>
+
+<img align="center" src="./p17.png" />
+
+<p>一个中规中矩的安卓程序，如我们之前所说在Managed下确实有一系列的dll，作为mono环境下的unity库。在lib库下，与windows时一样有两个mono库，作为C#环境，libunity.so是引擎库，而main.so是程序的入口，通过对apk的反编译分析</p>
+
+<img align="center" src="./p18.png" />
+
+<p>再反向分析so文件</p>
+
+<img align="center" src="./p19.png" />
+
+<p>综合来看，main.so就是起到了入口作用的C/C++程序，类似exe文件？安卓属于嵌入式系统，有一套比较复杂的程序管理系统，mainifest用于声明文件的配置，其实如果要用C/C++作为入口的话，应该可以使用NativeActivity，但很多引擎都不会这么做，包括cocos2d，其实原因不太复杂，很多API在java层才有，主要是framework下的东西，比如安卓桌面就是运行在java层下的</p>
+
+<img align="center" src="./p20.png" />
+
+<p>比较不同的是，在安卓下资源全都打包到了.unity3d下，但实际也不复杂，它把所有的场景都包含了进去，至于为什么两个系统有两种存储方式，我不知道，也不重要。</p>
+<h1 id="Unity的常用工具"><a href="#Unity的常用工具" class="headerlink" title="Unity的常用工具"></a>Unity的常用工具</h1><p>以上都是比较理想而简单的情况，实际开发中往往会加入各种东西，使工程变得十分的复杂，而且大多商业使用的公司基本都会有unity的源码，可以进行各种修改，或加入其它的库，分析会变得无比艰巨。但我们应该想起自己的目的——资源的解包，多于无关的东西就可以无需花费精力去研究了，我们来看一看最常用的两个辅助工具，AssetBundle和Il2cpp，它们代表了Unity最重要的两部分内容。</p>
+<h2 id="AssetBundle"><a href="#AssetBundle" class="headerlink" title="AssetBundle"></a>AssetBundle</h2><p>AssetBundle主要用于资源的打包压缩，有助于资源的管理和热更新，开发中的使用可以参考<a target="_blank" rel="noopener" href="https://docs.unity.cn/cn/current/Manual/AssetBundles-Workflow.html">官方处</a>，基于我们的目的，我们主要看一看它到底对输出程序产生了什么影响，拿一个常见的游戏为例</p>
+
+<img align="center" src="./p21.png" />
+
+<p>这里面的成分比较复杂，有许多外置的东西，我们肯定实验不出来，但我们发现了一个内存的大头StreamingAssets，它包含了几乎整个游戏的内存，这个实际就是使用AssetBundle后的资源存放文件，但在大多游戏里文件夹其实叫做AssetBundle，名字不是很重要，重要的是内容，由于这个游戏比较复杂，我们挑一个其它“受害者”</p>
+
+<img align="center" src="./p22.png" />
+
+<p>实际开发中的资源是大量的，按照传统的方式资源将全挤在一个文件内，从读取效率上来看是十分慢的，AssetBundle一个显著的作用就是将资源实现在封包中的分散，这样就可以通过文件系统的快速索引来读取资源，效率大大提高。分散存储还有一个好处就是可以进行部分更新，可以在本地记录一个资源的版本号，与服务器最新版本号进行比对修改，可以不更改旧资源情况下，更新添加新资源，机制有点类似于git，这样还可以有效地实现资源的热更新。总之它的作用就这样，也不是很复杂。</p>
+<h2 id="Il2cpp"><a href="#Il2cpp" class="headerlink" title="Il2cpp"></a>Il2cpp</h2><p>Il2cpp是不同于mono的一种对C#脚本的处理方式，在程序编译的时候可以进行选择</p>
+
+<img align="center" src="./p23.png" />
+
+<p>这里是官方的<a target="_blank" rel="noopener" href="https://docs.unity.cn/cn/current/Manual/IL2CPP.html">介绍</a>，Il2cpp的作用就是将C#代码转化为不依赖虚拟机的运行更加高效的cpp代码，以下是原来mono下脚本的运行架构</p>
+
+<img align="center" src="./p24.jpg" />
+
+<p>使用Il2cpp后的架构如下</p>
+
+<img align="center" src="./p25.jpg" />
+
+<p>目前只在手游中发现这种方案，对于windows系统来说.net的代码可能本身比较原生，运行效率也不一定就低。而在输出程序上</p>
+
+<img align="center" src="./p24.png" />
+
+<p>多了一个il2cpp文件夹，但其实它只保存了配置文件，在Managed下的C#库dll文件也没有了，取而代之的是在lib下</p>
+
+<img align="center" src="./p25.png" />
+
+<p>少了mono的库，多了一个libil2cpp，但注意它不是运行库，而是我们从C#转化的cpp编译生成的原生代码。不过嘛！代码与我们目标的资源关系不大，就不过多研究了。<br>对Unity的了解应该足够深入了吧？</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BC%95%E6%93%8E/">引擎</a><a class="post-meta__tags" href="/tags/%E6%B8%B8%E6%88%8F/">游戏</a></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">逯晓零</div><div class="author-info__description">我喜欢简洁，仅此而已。</div></div><div class="card-info-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E%E5%BC%80%E5%8F%91%E7%9A%84%E8%A7%86%E8%A7%92%E7%9C%8BUnity"><span class="toc-number">1.</span> <span class="toc-text">从开发的视角看Unity</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="toc-number">1.1.</span> <span class="toc-text">官方文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95"><span class="toc-number">1.2.</span> <span class="toc-text">工程目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unity%E5%BC%80%E5%8F%91%E7%90%86%E5%BF%B5"><span class="toc-number">1.3.</span> <span class="toc-text">Unity开发理念</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E%E7%94%A8%E6%88%B7%E7%9A%84%E8%A7%86%E8%A7%92%E7%9C%8BUnity"><span class="toc-number">2.</span> <span class="toc-text">从用户的视角看Unity</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">2.1.</span> <span class="toc-text">Windows</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#android"><span class="toc-number">2.2.</span> <span class="toc-text">android</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Unity%E7%9A%84%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">3.</span> <span class="toc-text">Unity的常用工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AssetBundle"><span class="toc-number">3.1.</span> <span class="toc-text">AssetBundle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Il2cpp"><span class="toc-number">3.2.</span> <span class="toc-text">Il2cpp</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-10-01-%E6%9D%82%E8%B0%88%EF%BC%9A2023-10-01/" title="杂谈：2023.10.01">杂谈：2023.10.01</a><time datetime="2023-10-01T09:15:46.000Z" title="发表于 2023-10-01 17:15:46">2023-10-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-09-03-%E6%88%91%E8%BF%98%E6%83%B3%E5%81%9A%E7%9A%84%E4%BA%8B/" title="我还想做的事">我还想做的事</a><time datetime="2023-09-02T23:41:56.000Z" title="发表于 2023-09-03 07:41:56">2023-09-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2023-07-27-%E9%AD%94%E7%BE%A4%E6%9C%88%E5%85%89/" title="魔群月光">魔群月光</a><time datetime="2023-07-27T07:34:21.000Z" title="发表于 2023-07-27 15:34:21">2023-07-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 逯晓零</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>
