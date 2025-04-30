@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>编程手记之字符串 | 虚空之地</title><meta name="keywords" content="Free"><meta name="author" content="逯晓零"><meta name="copyright" content="逯晓零"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[00:00.000]作词 : 魁 [00:01.000]作曲 : 折戸伸治 [00:02.000]编曲 : 中山真斗 [00:04.710]编曲 : 中山真斗 [00:31.590]伝える言葉は決まっていたはずなのに [00:31.590]明明已经决定要传达话语 [00:38.110]変わることのない景色に目をそらしてた [00:38.110]身处恒久">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程手记之字符串">
+<meta property="og:url" content="http://example.com/archives/2025-04-30-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
+<meta property="og:site_name" content="虚空之地">
+<meta property="og:description" content="[00:00.000]作词 : 魁 [00:01.000]作曲 : 折戸伸治 [00:02.000]编曲 : 中山真斗 [00:04.710]编曲 : 中山真斗 [00:31.590]伝える言葉は決まっていたはずなのに [00:31.590]明明已经决定要传达话语 [00:38.110]変わることのない景色に目をそらしてた [00:38.110]身处恒久">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<meta property="article:published_time" content="2025-04-30T05:53:40.000Z">
+<meta property="article:modified_time" content="2025-04-30T06:25:31.312Z">
+<meta property="article:author" content="逯晓零">
+<meta property="article:tag" content="Free">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/archives/2025-04-30-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '编程手记之字符串',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-04-30 14:25:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 往逝</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">虚空之地</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/articles/"><i class="fa-fw fa fa-book"></i><span> 文章</span></a></div><div class="menus_item"><a class="site-page" href="/dream/"><i class="fa-fw fa fa-lightbulb"></i><span> 往逝</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">编程手记之字符串</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-04-30T05:53:40.000Z" title="发表于 2025-04-30 13:53:40">2025-04-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-04-30T06:25:31.312Z" title="更新于 2025-04-30 14:25:31">2025-04-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container">
+        <div id="aplayer-fdcZTuZV" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content">[00:00.000]作词 : 魁
+[00:01.000]作曲 : 折戸伸治
+[00:02.000]编曲 : 中山真斗
+[00:04.710]编曲 : 中山真斗
+[00:31.590]伝える言葉は決まっていたはずなのに
+[00:31.590]明明已经决定要传达话语
+[00:38.110]変わることのない景色に目をそらしてた
+[00:38.110]身处恒久不变的风景中 却依然难以正视
+[00:44.800]小さな勇気が欲しくてうつむいた
+[00:44.800]渴望得到些许勇气 不禁垂头感慨
+[00:51.560]白い眩しさだけに焦がれてた
+[00:51.560]唯有一心向往着 那耀眼的白光
+[00:57.750]夏を書き綴るノートの終わりが近付いてくる
+[00:57.750]描绘夏日并装订成册的记录 也正当临近尾声
+[01:04.570]やがて訪れる日には せめて笑顔のままで
+[01:04.570]想要在即将到访的日子里 勉强保持笑容
+[01:10.920]手を振りたくて…
+[01:10.920]向你挥动双手
+[01:14.870]歩き続けることでしか届かない物があるよ
+[01:14.870]世上存在着 只有不断前进才终可传达的事物哟
+[01:21.520]今も暖かな手のぬくもりを探し続けている
+[01:21.520]如今 我正一如既往地探寻着 那充满情意的 手的温度
+[01:28.210]いくつもの優しさを繋いでも辿り着けないから
+[01:28.210]即使身边环绕着层层温柔 却仍然无法再度向前
+[01:34.840]今も何度でもボクは夏の面影の中
+[01:34.840]直到现在 无论经历多少次 我也始终深陷于夏日的旧时记忆中
+[01:41.150]繰り返すよ
+[01:41.150]徘徊不定着
+[01:58.260]静寂をさまよう一片の幼子は
+[01:58.260]藏于被静寂笼罩一方的婴儿
+[02:04.810]つかの間のゆりかごの中 目を閉じていた
+[02:04.810]转瞬间 在那摇篮里 轻轻地闭上了眼
+[02:11.550]夢から目覚めるその時がくるまで
+[02:11.550]自从梦境中醒来 直到那个时刻降临
+[02:18.090]白い眩しさに包まれている
+[02:18.090]均被耀眼的白光所包围
+[02:24.630]夏の足跡を追いかけボクは思い出をこぼす
+[02:24.630]追赶着夏天的足迹之时 我不由得思绪万千
+[02:31.220]何が悲しいのかさえ忘れてしまうけれど
+[02:31.220]甚至连何为悲伤也忘得一干二净
+[02:37.530]立ち止まれない
+[02:37.530]但我不能就此停下脚步
+[02:41.580]歩き続ける事でしか残せないものがあるよ
+[02:41.580]世上存在着 只有不断前进才终可遗留的事物哟
+[02:48.130]あの日途切れてしまった言葉を繋ぎ止めたいだけ
+[02:48.130]那天 我仅仅想要维系住 那曾经失联的话语
+[02:54.910]風が涙をさらったとしても忘れないで欲しい
+[02:54.910]即使风儿将泪水带走 也始终不愿忘记
+[03:01.520]声が届かなくても 夏を刻む花火を
+[03:01.520]纵然声音传达不到 那标识着夏日的花火...
+[03:07.900]見た記憶を…
+[03:07.900]回想起的记忆也...
+[03:35.820]羽ばたいた数を数え空を舞う羽は
+[03:35.820]轻轻拍打翅膀 细心计数着 在空中飞舞的羽毛
+[03:42.190]小さな勇気でいつも眩しさだけ求め続けていた
+[03:42.190]凭借小小的勇气 不停地寻找着 无论何时都会发光的事物
+[03:51.560]歩き続ける事でしか届かないものがあるよ
+[03:51.560]世上存在着 只有不断前进才终可传达的事物哟
+[03:58.120]今も暖かな手のぬくもりを探し続けている
+[03:58.120]如今 我正一如既往地探寻着 那充满情意的 手的温度
+[04:04.800]いくつもの優しさを繋いでも辿り着けないから
+[04:04.800]即使身边环绕着层层温柔 却仍然无法再度向前
+[04:11.540]今も何度でもボクは夏の面影を
+[04:11.540]直到现在 无论经历多少次 我也终于将那夏日的旧时记忆
+[04:17.860]振り返るよ
+[04:17.860]重现于脑海中了</pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-fdcZTuZV"),
+            narrow: false,
+            autoplay: true,
+            showlrc: 2,
+            music: {
+              title: "アルカテイル",
+              author: "鈴木このみ",
+              url: "鈴木このみ - アルカテイル.mp3",
+              pic: "/archives/2025-04-30-编程手记之字符串/cover.jpg",
+              lrc: "アルカテイル - 鈴木このみ.lrc"
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+
+<blockquote>
+<p>知其源，以用之。</p>
+</blockquote>
+<p>在Rust的研究之中，最让我惊喜的就是字符串了！字符串是什么，搞编程的可见过太多了，但你是否有研究过，这种最基础而常用的数据结构是怎么实现的，特别是在静态编译语言中。在C语言中，本质上没有字符串的概念，只有单纯的char数组，通过’\0’来作为结尾，而在C++、go等稍微高级点的语言中，引入了对char数组更加智能的管理，从而形成了string的概念，但我并不认为它们是真正意义上的字符串，因为其本质上没有编码的概念。下面是个简单的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    std::string str = &quot;你好，世界！&quot;;</span><br><span class="line">    std::cout &lt;&lt; str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将其以UTF-8的编码写入编辑器，再在编译的时候使用UTF-8编码选项，最后在GBK编码(比如Windows的PowerShell)的代码页中执行。虽然看起来挺SB的，但理解字符串的流转过程非常重要，在编译以后字符串常量”你好，世界！”会以UTF-8的编码，存在于可执行文件的.rdata段，实际使用的时候，如果是<code>const char*</code>只是在栈帧中进行了引用，而<code>std::string</code>为了后续的字符操作会有一个拷贝的过程，<code>std::cout</code>作为标准输出流，其不会关注编码，只会如实的按byte输出数据，具体显示的内容则由shell根据代码页查询字体以后进行显示。这么一看，似乎只是编码没有玩好而已，因为如果在go语言下就没有任何问题，为什么呢？因为其有着一套严格的编码限制，编译的时候强制UTF-8，在<code>fmt.Println()</code>时只接受UTF-8编码，并在输出时根据系统编码进行灵活切换。要想扰乱go，也可以，就是准备一个GBK编码的IO，比如文本，再直接输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;io/ioutil&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    // a.txt是个GBK编码文件</span><br><span class="line">    content, err := ioutil.ReadFile(&quot;a.txt&quot;)</span><br><span class="line">    if err != nil &#123;</span><br><span class="line">        panic(err)</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(string(content))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么我不喜欢这套系统呢？再来看看流行语言之一Java的实现，在较新的版本中，其String也相当于byte数组的管理机制，但区别在于其内置一个编码器，例如只有ASCII之类简单字符时，使用Latin-1以节约内存，否则使用UTF16以提升兼容性。这样的好处就是，将byte流和char流进行严格区分，两者之间进行切换的时候，都需要指定编码以保证字符流转的正确性，平常没指定的时候或许只是用了默认编码。另一方面也是一个简单的道理，如果你的string没办法对字符编码进行内部管理的话，那么就与我在C中使用<code>const char*</code>配上一点操作工具就没啥区别了，如果扯静态编译和内存开销的话，并不是什么好的理由。比如开源社区喜欢的UI框架Qt，对字符串的重新实现QString，就是一种类似Java的带编码的实现，严格意义上从Byte流到Char流或从Char流到Byte流，都是需要指定编码的。当然最过优雅的非Rust莫属了，其中<code>Vec&lt;u8&gt;</code>和<code>＆[u8]</code>类似byte数组所以不做讨论，所以主要的目光聚集在<code>String</code>和<code>＆str</code>，前者是实际的字符串数据，后者则是对字符串数据的引用，有这样的区分来自于Rust对内存数据所有权的严格限制，不严谨的情况下看成C/C++中的对象和引用也是可以的。实际上，对于大多数语言字符串String的数据本身就是常量，我们看到的各种切片连接等，实际都是产生了新的字符串，内存利用确实不够环保，但自动回收机制也可以让我们省心一些。回到String这里，其内部采用UTF-8的编码，通过<code>.chars()</code>可以实现带编码的单字符操作，而<code>.bytes()</code>实现字节级的操作，并在标准库中只提供<code>String::from_utf8</code>或<code>str::from_utf8</code>来从utf-8的字节流来实现转化，如果想要实现GBK之类的其它编码，就得靠encoding_rs之类的第三方库。这时，你可能会觉得这不就又回到了，C/C++和go等静态编译型语言的处境吗？对于静态编译语言，内存管理往往都是要小心翼翼的，正因如此对于动态内存变化的String类型，我们借助了相应的标准库，但实际上我们可以对字符串要求更多一点，字符串并不是字节串，如果只是要求动态变化，诸如vector、array之类的容器难道不是更好的选择吗？只有当编码被应用的时候，字符串才有了字符的意义，对于字符管理，一个很好的准则就是，内部采用统一的编码进行流转，而输入输出时，根据外部编码情况进行灵活切换。C++就不论了，go和rust的最大区别在于，go感知不到编码，因为其内部的string根本没有编码认知，上面读文件就是一个典型的例子，如果放到rust中，像下面这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">use std::fs::File;</span><br><span class="line">use std::io::&#123;BufReader, BufRead, Error&#125;;</span><br><span class="line"></span><br><span class="line">fn main()  -&gt; Result&lt;(), Error&gt; &#123;</span><br><span class="line">    let input = File::open(&quot;a.txt&quot;)?;</span><br><span class="line">    let buffered = BufReader::new(input);</span><br><span class="line"></span><br><span class="line">    for line in buffered.lines() &#123;</span><br><span class="line">        println!(&quot;&#123;&#125;&quot;, line?);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Ok(())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当a.txt采用UTF-8编码时，一切正常；（虽然你可能觉得上面的写法很奇怪，但换成正常的<code>file.read_to_string</code>也是一样的结果）而当a.txt采用GBK编码时，自然就产生了编码错误</p>
+<img src="/archives/2025-04-30-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/p1.png" class="">
+
+<p>这说明了，rust确实可以感知到外部IO输入输出编码的变化，想要多识别几种编码也很简单，比如像下面这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">use std::fs::File;</span><br><span class="line">use std::io::Read;</span><br><span class="line">use std::io::Error;</span><br><span class="line">use encoding::&#123;Encoding, DecoderTrap, all::GBK&#125;;</span><br><span class="line"></span><br><span class="line">fn main() -&gt; Result&lt;(),Error&gt; &#123;</span><br><span class="line">    // 读取文件内容</span><br><span class="line">    let mut file = File::open(&quot;a.txt&quot;)?;</span><br><span class="line">    let mut contents = Vec::new();</span><br><span class="line">    file.read_to_end(&amp;mut contents)?;</span><br><span class="line">    // 尝试解码为UTF-8</span><br><span class="line">    if let Ok(utf8_str) = String::from_utf8(contents.clone()) &#123;</span><br><span class="line">        println!(&quot;UTF-8 : &#123;&#125;&quot;, utf8_str);</span><br><span class="line">    // 如果解码失败，则尝试使用GBK解码</span><br><span class="line">    &#125; else if let Ok(gbk_str) = GBK.decode(&amp;contents, DecoderTrap::Strict) &#123;</span><br><span class="line">        println!(&quot;GBK : &#123;&#125;&quot;, gbk_str);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        println!(&quot;解码失败&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    Ok(())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样其就可以感知两种字符串的编码类型了，我们要明白的是，这种限制出自rust本身对于string的实现。</p>
+<blockquote>
+<p>无意义的内卷和精神内耗，并常常以此自我感动，这很有趣吗？</p>
+</blockquote>
+<p>既然以字符串为题，我们再来讲个字符串相关的话题，即翻译，准确来说是HOOK型翻译器，更深层次来说，就是如何从程序中获取字符串，图片字符就直接PASS得了，这样无论如何，字符总是会出现在内存中的，我就以我最喜欢的翻译器之一LunaTranslator来讲讲，其中的一些小奥秘吧。LunaTranslator是一个综合性强，非常值得学习的项目，但其实我们不需要了解这么多，不过我还是先说一下其基本的运行流程吧。当一个游戏被启动或附加时，翻译器程序的<code>LunaHost</code>通过进程间通信方法之管道与之建立连接，并启动事件监听线程</p>
+<figure class="highlight c++"><figcaption><span>host.cpp src/cpp/LunaHook/LunaHost/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">ConnectProcess</span><span class="params">(DWORD processId)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (processId == <span class="built_in">GetCurrentProcessId</span>())</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    HANDLE hookPipe = <span class="built_in">CreateNamedPipeW</span>((std::<span class="built_in">wstring</span>(HOOK_PIPE) + std::<span class="built_in">to_wstring</span>(processId)).<span class="built_in">c_str</span>(), PIPE_ACCESS_INBOUND, PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE, PIPE_UNLIMITED_INSTANCES, <span class="number">0</span>, PIPE_BUFFER_SIZE, MAXDWORD, &amp;allAccess);</span><br><span class="line">    HANDLE hostPipe = <span class="built_in">CreateNamedPipeW</span>((std::<span class="built_in">wstring</span>(HOST_PIPE) + std::<span class="built_in">to_wstring</span>(processId)).<span class="built_in">c_str</span>(), PIPE_ACCESS_OUTBOUND, PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE, PIPE_UNLIMITED_INSTANCES, PIPE_BUFFER_SIZE, <span class="number">0</span>, MAXDWORD, &amp;allAccess);</span><br><span class="line">    HANDLE pipeAvailableEvent = <span class="built_in">CreateEventW</span>(&amp;allAccess, FALSE, FALSE, (std::<span class="built_in">wstring</span>(PIPE_AVAILABLE_EVENT) + std::<span class="built_in">to_wstring</span>(processId)).<span class="built_in">c_str</span>());</span><br><span class="line">    <span class="built_in">SetEvent</span>(pipeAvailableEvent);</span><br><span class="line">    std::<span class="built_in">thread</span>(__handlepipethread, hookPipe, hostPipe, pipeAvailableEvent).<span class="built_in">detach</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于通信的数据来源，我们一点点来说，当管道启动以后，翻译器会通过<code>shareddllproxy.exe</code>(它还能与各种翻译工具建立连接，但我们并不关注获取文本以后的事了)的小工具将<code>LunaHook.dll</code>注入游戏</p>
+<figure class="highlight python"><figcaption><span>texthook.py src/LunaTranslator/textsource/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">start_unsafe</span>(<span class="params">self, pids</span>):</span><br><span class="line">    injectpids = []</span><br><span class="line">    <span class="keyword">for</span> pid <span class="keyword">in</span> pids:</span><br><span class="line">        self.Luna_ConnectProcess(pid)</span><br><span class="line">        <span class="keyword">if</span> self.Luna_CheckIfNeedInject(pid):</span><br><span class="line">            injectpids.append(pid)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(injectpids):</span><br><span class="line">        arch = [<span class="string">&quot;32&quot;</span>, <span class="string">&quot;64&quot;</span>][self.is64bit]</span><br><span class="line">        dll = os.path.abspath(<span class="string">&quot;files/plugins/LunaHook/LunaHook&#123;&#125;.dll&quot;</span>.<span class="built_in">format</span>(arch))</span><br><span class="line">        injectdll(injectpids, arch, dll)</span><br></pre></td></tr></table></figure>
+
+<p>而整个<code>LunaHook.dll</code>才是我们获取文本的核心，其源码位于<code>src/cpp/LunaHook/LunaHook</code>中，在被加载函数<code>DllMain</code>中并没有什么值得注意的点</p>
+<figure class="highlight c++"><figcaption><span>main.cc src/cpp/LunaHook/LunaHook/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL WINAPI <span class="title">DllMain</span><span class="params">(HINSTANCE hModule, DWORD fdwReason, LPVOID)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">switch</span> (fdwReason)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">	&#123;</span><br><span class="line">		...</span><br><span class="line">		<span class="built_in">MH_Initialize</span>();</span><br><span class="line"></span><br><span class="line">		...</span><br><span class="line">		<span class="built_in">CloseHandle</span>(<span class="built_in">CreateThread</span>(<span class="literal">nullptr</span>, <span class="number">0</span>, Pipe, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="literal">nullptr</span>)); <span class="comment">// Using std::thread here = deadlock</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要有两件事，一个是使用了<a target="_blank" rel="noopener" href="https://github.com/TsudaKageyu/minhook">MinHook</a>的库，其原理和我们以前用过的Detours库是类似的，就是在进程内存相应位置写入无条件跳转指令JMP，另一个则是启动核心的Pipe线程</p>
+<figure class="highlight c++"><figcaption><span>main.cc src/cpp/LunaHook/LunaHook/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">Pipe</span><span class="params">(LPVOID)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">bool</span> running = <span class="literal">true</span>; running; hookPipe = INVALID_HANDLE_VALUE)</span><br><span class="line">	...</span><br><span class="line">	<span class="keyword">if</span> (dont_detach)</span><br><span class="line">	&#123;</span><br><span class="line">		host_connected = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">Pipe</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>嗯，这个死循环写得挺有特色的。循环的前半段用于与翻译器的LunaHost建立管道连接并有一小段信息获取的过程，完成以后其开始等待hostPipe的请求，虽然一眼看去Host只搞了一个设置语言的请求，但实际其他行为是通过UI触发的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">src\LunaTranslator\gui\selecthook.py</span><br><span class="line">class searchhookparam(LDialog):</span><br><span class="line">    ...</span><br><span class="line">    def __init__(self, parent) -&gt; None:</span><br><span class="line">    ...</span><br><span class="line">        btn.clicked.connect(self.searchstart)</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">    def searchstart(self):</span><br><span class="line">    ...</span><br><span class="line">        gobject.baseobject.textsource.findhook(</span><br><span class="line">            usestruct, dumpvalues.get(&quot;addresses&quot;, None)</span><br><span class="line">        )</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">src\LunaTranslator\textsource\texthook.py</span><br><span class="line">class texthook(basetext):</span><br><span class="line">    @threader</span><br><span class="line">    def findhook(self, usestruct, addresses):</span><br><span class="line">        ...</span><br><span class="line">        self.Luna_FindHooks(pid, usestruct, _callback, addresses)</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">src\cpp\LunaHook\LunaHost\LunaHostDll.cpp</span><br><span class="line">C_LUNA_API void Luna_FindHooks(DWORD pid, SearchParam sp, findhookcallback_t findhookcallback, LPCWSTR addresses)</span><br><span class="line">&#123;</span><br><span class="line">    Host::FindHooks(pid, sp, [=](HookParam hp, std::wstring text)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">src\cpp\LunaHook\LunaHost\host.cpp</span><br><span class="line">namespace Host</span><br><span class="line">...</span><br><span class="line">    void FindHooks(DWORD processId, SearchParam sp, HookEventHandler HookFound, LPCWSTR addresses)</span><br><span class="line">    ...</span><br><span class="line">        prs.at(processId).Send(FindHookCmd(sp));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对于细节，我们就不关注了，插入移除Hook和传输文本也是基操，所以查找Hook才是最有趣的事。在基础的<code>HOST_COMMAND_INSERT_PC_HOOKS</code>指令中，其会把Window常用的各种与字符串相关的函数钩住</p>
+<figure class="highlight c++"><figcaption><span>pchooks.cpp src/cpp/LunaHook/LunaHook/engines/pchooks/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// jichi 7/17/2014: Renamed from InitDefaultHook</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PcHooks::hookGDIFunctions</span><span class="params">(<span class="type">void</span> *ptr)</span></span></span><br><span class="line"><span class="function">...</span></span><br><span class="line"><span class="function"><span class="comment">// jichi 6/18/2015: GDI+ functions</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PcHooks::hookGDIPlusFunctions</span><span class="params">(<span class="type">void</span> *ptr)</span></span></span><br><span class="line"><span class="function">...</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PcHooks::hookD3DXFunctions</span><span class="params">(HMODULE d3dxModule, <span class="type">void</span> *ptr)</span></span></span><br><span class="line"><span class="function"><span class="comment">// jichi 10/2/2013</span></span></span><br><span class="line"><span class="function"><span class="comment">// Note: All functions does not have NO_CONTEXT attribute and will be filtered.</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">PcHooks::hookOtherPcFunctions</span><span class="params">(<span class="type">void</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span></span><br></pre></td></tr></table></figure>
+
+<p>在钩子初始化的时候有个<code>HIJACK()</code>的函数，它实际是用来判断游戏引擎或平台用的，并可以根据情形建立不同的钩子，如果无法识别就只能通过系统API了，这实际类似于以前使用vnr时的特殊码查找，在<code>enginecollection32.cpp</code>和<code>enginecollection64.cpp</code>进行了各种游戏引擎的枚举</p>
+<figure class="highlight c++"><figcaption><span>enginecontrol.cpp src/cpp/LunaHook/LunaHook/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">checkengine</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> engines = <span class="built_in">check_engines</span>();</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> m : engines)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="type">bool</span> matched = <span class="built_in">safematch</span>(m);</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">if</span> (!matched)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">ConsoleOutput</span>(TR[MatchedEngine], m-&gt;<span class="built_in">getenginename</span>());</span><br><span class="line">        <span class="type">bool</span> attached = <span class="built_in">safeattach</span>(m);</span><br><span class="line">        <span class="keyword">if</span> (attached)</span><br><span class="line">        &#123;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">if</span> (jittypedefault != JITTYPE::PC)</span><br><span class="line">            &#123;</span><br><span class="line">                spDefault.isjithook = <span class="literal">true</span>;</span><br><span class="line">                spDefault.minAddress = <span class="number">0</span>;</span><br><span class="line">                spDefault.maxAddress = <span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里的safe只是用来套壳用的，实际的检测方案和钩子<code>attach_function()</code>由各引擎决定，例如Krkr引擎</p>
+<figure class="highlight c++"><figcaption><span>KiriKiri.h src/cpp/LunaHook/LunaHook/engine64/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">KiriKiri</span>()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    check_by = CHECK_BY::CUSTOM;</span><br><span class="line">    is_engine_certain = <span class="literal">false</span>;</span><br><span class="line">    check_by_target = []()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Util::<span class="built_in">CheckFile</span>(<span class="string">L&quot;*.xp3&quot;</span>) || Util::<span class="built_in">SearchResourceString</span>(<span class="string">L&quot;TVP(KIRIKIRI)&quot;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>类型<code>CHECK_BY::CUSTOM</code>表示，由引擎的<code>check_by_target() -&gt; bool</code>函数来自行判断，此处检测了两个情形，一是文件由<code>.xp3</code>后缀封包，二是，游戏程序的<code>.rsrc</code>段是否包含“TVP(KIRIKIRI)”的标志字符(krkr本身是可以免封包的)。在戏画社的NeXAS引擎下，总共尝试了5种钩子</p>
+<figure class="highlight c++"><figcaption><span>NeXAS.cpp src/cpp/LunaHook/LunaHook/engine32/</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">NeXAS::attach_function</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">auto</span> _ = _2() || _3() || <span class="built_in">b4</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">InsertNeXASHookA</span>() || <span class="built_in">InsertNeXASHookW</span>() || _;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其中的<code>_2()</code>为13个字节的特征匹配，其自动过滤了以<code>@</code>开头的控制字符串，虽然这游戏我没玩过更没反汇编调试过，但我研究过不少galgame，所以基本都能猜出个大概；<code>_3()</code>挺有趣的，查找两次控制字符<code>@v</code>后，先反查出其所处的引用位置，再反查出其所处的函数；嗯，感觉没啥继续讲的必要了，这些hook实际就是对我们反汇编调试的过程模拟，或许我更想表达的是，在二进制程序中查找想要的变量值是个复杂的学问，比如CheatEngine，我感觉它就两个作用，查找变量和修改变量，但仅仅这两个作用其衍生出了一系列的方法和脚本，而我们的字符串实际只是众多变量类型的一小部分罢了。其实，还有一个值得想想的东西，为什么字符串这么普通的东西，会有这么多的存在形式？嗯，反正我不太懂，但可以胡乱的给出结论，“大概是代码和人的多样性吧”。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">逯晓零</div><div class="author-info__description">我喜欢简洁，仅此而已。</div></div><div class="card-info-data site-data is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">65</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2025-04-30-%E7%BC%96%E7%A8%8B%E6%89%8B%E8%AE%B0%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="编程手记之字符串">编程手记之字符串</a><time datetime="2025-04-30T05:53:40.000Z" title="发表于 2025-04-30 13:53:40">2025-04-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2025-04-21-%E5%B7%B2%E5%8E%BB%E7%9A%84%E6%97%A0%E9%A2%98/" title="已去的无题">已去的无题</a><time datetime="2025-04-21T09:58:59.000Z" title="发表于 2025-04-21 17:58:59">2025-04-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/2025-03-31-%E7%BC%BA%E5%A4%B1%E4%B9%8B%E7%89%A9/" title="缺失之物">缺失之物</a><time datetime="2025-03-31T01:15:50.000Z" title="发表于 2025-03-31 09:15:50">2025-03-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By 逯晓零</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div></div></body></html>
